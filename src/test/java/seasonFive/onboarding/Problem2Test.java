@@ -1,4 +1,6 @@
-import onBoarding.problem2.Problem2;
+package seasonFive.onboarding;
+
+import seasonFive.onBoarding.problem2.Problem2;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

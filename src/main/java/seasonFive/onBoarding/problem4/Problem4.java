@@ -1,4 +1,4 @@
-package onBoarding.problem4;
+package seasonFive.onBoarding.problem4;
 
 public class Problem4 {
 

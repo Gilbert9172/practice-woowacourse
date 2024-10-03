@@ -1,4 +1,4 @@
-package onBoarding.problem1;
+package seasonFive.onBoarding.problem1;
 
 import java.util.Arrays;
 

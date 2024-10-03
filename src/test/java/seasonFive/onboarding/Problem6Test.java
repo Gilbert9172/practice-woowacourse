@@ -1,4 +1,6 @@
-import onBoarding.problem6.Problem6;
+package seasonFive.onboarding;
+
+import seasonFive.onBoarding.problem6.Problem6;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

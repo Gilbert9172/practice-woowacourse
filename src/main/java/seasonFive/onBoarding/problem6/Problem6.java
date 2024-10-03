@@ -1,7 +1,6 @@
-package onBoarding.problem6;
+package seasonFive.onBoarding.problem6;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Problem6 {
 

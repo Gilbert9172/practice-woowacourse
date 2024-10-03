@@ -1,7 +1,6 @@
-import onBoarding.problem1.Problem1;
-import onBoarding.problem2.Problem2;
-import onBoarding.problem3.Problem3;
-import org.junit.jupiter.api.Nested;
+package seasonFive.onboarding;
+
+import seasonFive.onBoarding.problem1.Problem1;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

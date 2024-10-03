@@ -1,4 +1,4 @@
-package onBoarding.problem6;
+package seasonFive.onBoarding.problem6;
 
 public class Student {
     private String nickname;

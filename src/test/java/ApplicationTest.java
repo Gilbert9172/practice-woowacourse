@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import problem1.Problem1;
 import problem2.Problem2;
+import problem3.Problem3;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -85,6 +86,17 @@ public class ApplicationTest {
             String cryptogram = "abbaaacaac";
             String result = "a";
             assertThat(Problem2.solution(cryptogram)).isEqualTo(result);
+        }
+    }
+
+    @Nested
+    class Problem3Test {
+        @Test
+        void case1() {
+            int input = 33;
+            int expected = 14;
+            Problem3 problem3 = new Problem3();
+            assertThat(problem3.solution(input)).isEqualTo(expected);
         }
     }
 }

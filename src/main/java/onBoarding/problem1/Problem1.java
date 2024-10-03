@@ -1,4 +1,4 @@
-package problem1;
+package onBoarding.problem1;
 
 import java.util.Arrays;
 

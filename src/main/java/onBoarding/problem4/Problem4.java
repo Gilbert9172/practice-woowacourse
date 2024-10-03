@@ -1,4 +1,4 @@
-package problem4;
+package onBoarding.problem4;
 
 public class Problem4 {
 

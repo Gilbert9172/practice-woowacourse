@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import problem4.Problem4;
+import onBoarding.problem4.Problem4;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

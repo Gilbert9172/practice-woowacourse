@@ -1,5 +1,7 @@
 package seasonSix.racingcar.model;
 
+import seasonSix.racingcar.model.validator.NameLengthValidator;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,8 +21,11 @@ public class RacingCar {
     }
 
     public static List<RacingCar> generateRacingCars(String input) {
-        return Arrays.stream(input.split(","))
-                .map(RacingCar::initiate).toList();
+        List<String> names = Arrays.stream(input.strip().split(",")).map(String::strip).toList();
+        for (String name : names) {
+            NameLengthValidator.check(name);
+        }
+        return names.stream().map(RacingCar::initiate).toList();
     }
 
     public void moveForward(int movementCheckValue) {

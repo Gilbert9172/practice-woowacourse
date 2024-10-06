@@ -1,5 +1,7 @@
 package seasonSix.racingcar.model;
 
+import seasonSix.racingcar.model.validator.NameLengthValidator;
+import seasonSix.racingcar.model.validator.RangeValidator;
 import seasonSix.racingcar.utils.RandomUtil;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ public class GameManager {
     private List<RacingCar> racingCars = new ArrayList<>();
 
     public static GameManager initiate(int phase, List<RacingCar> racingCars) {
+        // TODO : racingCars 예외 처리
+        RangeValidator.check(phase);
         return new GameManager(phase, racingCars);
     }
 

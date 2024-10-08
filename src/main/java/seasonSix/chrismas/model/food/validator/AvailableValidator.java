@@ -14,12 +14,9 @@ public class AvailableValidator extends FoodValidator {
                 .map(Food::getName)
                 .toList();
         menus.forEach(menu -> {
-            availableFoods.stream()
-                    .filter(target -> !availableFoodNames.contains(menu))
-                    .findFirst()
-                    .ifPresent(food -> {
-                        throw new NotAvailableFoodException();
-                    });
+            if (!availableFoodNames.contains(menu)) {
+                throw new NotAvailableFoodException();
+            }
         });
     }
 }

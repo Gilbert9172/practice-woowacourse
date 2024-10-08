@@ -1,7 +1,7 @@
 package seasonSix.chrismas.model.event;
 
 import seasonSix.chrismas.model.food.FoodCategory;
-import seasonSix.chrismas.utils.PriceManagingSystem;
+import seasonSix.chrismas.utils.PriceManagingUtil;
 
 public class ChristmasEvent extends Event {
 
@@ -11,7 +11,7 @@ public class ChristmasEvent extends Event {
                 EventType.CHRISTMAS,
                 FoodCategory.ALL,
                 new EventDate(25),
-                PriceManagingSystem.christmasEventDiscount(date)
+                PriceManagingUtil.christmasEventDiscount(date)
         );
     }
 }

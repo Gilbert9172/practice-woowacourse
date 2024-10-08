@@ -17,4 +17,16 @@ public class Event {
         this.eventDate = eventDate;
         this.discount = discount;
     }
+
+    public Money getDiscount() {
+        return discount;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public FoodCategory getFoodCategory() {
+        return foodCategory;
+    }
 }

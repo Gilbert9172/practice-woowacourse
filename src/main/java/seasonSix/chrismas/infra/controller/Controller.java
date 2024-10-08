@@ -1,13 +1,14 @@
 package seasonSix.chrismas.infra.controller;
 
-import seasonSix.chrismas.model.event.Event;
+import seasonSix.chrismas.model.CustomerPlan;
+import seasonSix.chrismas.model.event.EventManager;
+import seasonSix.chrismas.model.planner.Planner;
 import seasonSix.chrismas.repository.EventRepository;
 import seasonSix.chrismas.infra.DataFactory;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.service.PlannerService;
 
-import java.util.List;
 import java.util.Map;
 
 public class Controller {
@@ -23,10 +24,15 @@ public class Controller {
     }
 
     public void choosePlanner() {
+        // Initialize
         DataFactory dataFactory = new DataFactory(foodRepository, eventRepository);
         int date = dataFactory.generateDate();
         Map<Food, Integer> orderSheet = dataFactory.generateOderSheet();
-        List<Event> events = dataFactory.generateEvents(date);
-        plannerService.servePlanner(date, orderSheet, events);
+
+        // Main Logic
+        Planner planner = plannerService.generateForToday(date);
+        EventManager eventManager = planner.getEventManager();
+        CustomerPlan customersPlan = plannerService.getCustomersTodayPlan(eventManager, orderSheet);
+        System.out.println("finish");
     }
 }

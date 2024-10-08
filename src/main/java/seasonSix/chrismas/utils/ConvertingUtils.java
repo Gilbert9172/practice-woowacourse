@@ -29,7 +29,7 @@ public class ConvertingUtils {
     public static Map<Food, Integer> mapToOrderSheet(String source, List<Food> availableFoods) {
         List<String> convertedSource = ConvertingUtils.stringToList(source);
         Map<Food, Integer> foodMap = new HashMap<>();
-        mapToFoodNames(convertedSource).forEach(menu -> {
+        convertedSource.forEach(menu -> {
             String name = menu.split("-")[0];
             Integer amount = Integer.parseInt(menu.split("-")[1]);
             Food food = availableFoods.stream()

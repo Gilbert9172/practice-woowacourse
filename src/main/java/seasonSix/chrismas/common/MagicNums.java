@@ -5,7 +5,6 @@ public enum MagicNums {
     YEAR(2023),
     MONTH(12),
     CHRISTMAS(25);
-    ;
 
     final int val;
 

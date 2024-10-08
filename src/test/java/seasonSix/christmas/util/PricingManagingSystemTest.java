@@ -4,7 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import seasonSix.chrismas.common.Money;
-import seasonSix.chrismas.utils.PriceManagingSystem;
+import seasonSix.chrismas.utils.PriceManagingUtil;
 
 public class PricingManagingSystemTest {
 
@@ -15,7 +15,7 @@ public class PricingManagingSystemTest {
         int date = 1;
 
         //when
-        Money money = PriceManagingSystem.christmasEventDiscount(date);
+        Money money = PriceManagingUtil.christmasEventDiscount(date);
 
         //then
         Assertions.assertThat(money.equals(Money.newOne(1000))).isEqualTo(true);
@@ -28,7 +28,7 @@ public class PricingManagingSystemTest {
         int date = 25;
 
         //when
-        Money money = PriceManagingSystem.christmasEventDiscount(date);
+        Money money = PriceManagingUtil.christmasEventDiscount(date);
 
         //then
         Assertions.assertThat(money.equals(Money.newOne(3400))).isEqualTo(true);
@@ -41,7 +41,7 @@ public class PricingManagingSystemTest {
         int date = 26;
 
         //when
-        Money money = PriceManagingSystem.christmasEventDiscount(date);
+        Money money = PriceManagingUtil.christmasEventDiscount(date);
 
         //then
         Assertions.assertThat(money.equals(Money.zero)).isEqualTo(true);

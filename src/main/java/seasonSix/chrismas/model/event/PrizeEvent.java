@@ -1,15 +1,21 @@
 package seasonSix.chrismas.model.event;
 
+import seasonSix.chrismas.common.Money;
 import seasonSix.chrismas.model.food.FoodCategory;
 
+import static seasonSix.chrismas.model.event.EventPriceTable.MIN_RECEIVABLE_PRICE;
+
 public class PrizeEvent extends Event {
+
+    public static final Money minReceivablePrice = MIN_RECEIVABLE_PRICE.getMoney();
+
     public PrizeEvent() {
         super(
                 "증정이벤트",
                 EventType.PRIZE,
                 FoodCategory.ALL,
                 new EventDate(31),
-                DiscountTable.PRIZE.getMoney()
+                EventPriceTable.PRIZE.getMoney()
         );
     }
 }

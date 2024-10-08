@@ -35,7 +35,8 @@ public class DataFactory {
         }
     }
 
-    public Map<Food, Integer> generateOderSheet(List<Food> availableFoods) {
+    public Map<Food, Integer> generateOderSheet() {
+        List<Food> availableFoods = this.generateFoods();
         while (true) {
             try {
                 System.out.println(InputMessage.INPUT_MENU);

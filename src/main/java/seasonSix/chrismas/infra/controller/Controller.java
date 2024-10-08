@@ -25,8 +25,7 @@ public class Controller {
     public void choosePlanner() {
         DataFactory dataFactory = new DataFactory(foodRepository, eventRepository);
         int date = dataFactory.generateDate();
-        List<Food> availableFoods = dataFactory.generateFoods();
-        Map<Food, Integer> orderSheet = dataFactory.generateOderSheet(availableFoods);
+        Map<Food, Integer> orderSheet = dataFactory.generateOderSheet();
         List<Event> events = dataFactory.generateEvents(date);
         plannerService.servePlanner(date, orderSheet, events);
     }

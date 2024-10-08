@@ -3,10 +3,8 @@ package seasonSix.chrismas.utils;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.model.food.exception.NotAvailableFoodException;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ConvertingUtils {
 
@@ -45,4 +43,9 @@ public class ConvertingUtils {
         return Integer.parseInt(source);
     }
 
+    public static Set<String> mapToUniqueFoodNames(List<String> source) {
+        return source.stream()
+                .map(s -> s.split("-")[0])
+                .collect(Collectors.toSet());
+    }
 }

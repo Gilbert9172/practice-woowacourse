@@ -11,10 +11,7 @@ import seasonSix.chrismas.model.food.beverage.RedWine;
 import seasonSix.chrismas.model.food.beverage.ZeroCoke;
 import seasonSix.chrismas.model.food.dessert.ChocolateCake;
 import seasonSix.chrismas.model.food.dessert.IceCream;
-import seasonSix.chrismas.model.food.exception.DuplicatedFoodException;
-import seasonSix.chrismas.model.food.exception.NotAvailableFoodException;
-import seasonSix.chrismas.model.food.exception.NotAvailableFormatException;
-import seasonSix.chrismas.model.food.exception.NotAvailableOrderException;
+import seasonSix.chrismas.model.food.exception.*;
 import seasonSix.chrismas.model.food.main.BbqRip;
 import seasonSix.chrismas.model.food.main.ChristmasPasta;
 import seasonSix.chrismas.model.food.main.SeafoodPasta;
@@ -35,15 +32,23 @@ public class FoodValidatorFacadeTest {
     );
 
     @Test
-    @DisplayName("통합 테스트")
-    void foodValidatorFacadeTest() {
+    @DisplayName("통합 테스트1")
+    void foodValidatorFacadeTestV1() {
         //given
         String source = "시저샐러드-1,시저샐러드-1";
-        //when
+        //then
         assertThatThrownBy(() -> {
             FoodValidatorFacade.check(source, availableFoods);
         }).isInstanceOf(DuplicatedFoodException.class);
+    }
+
+    @Test
+    @DisplayName("통합 테스트2")
+    void foodValidatorFacadeTestV2() {
+        //given
+        String source = "제로콜라-1,시저샐러드-1";
         //then
+        FoodValidatorFacade.check(source, availableFoods);
     }
 
     @Test
@@ -132,5 +137,27 @@ public class FoodValidatorFacadeTest {
         assertThatThrownBy(() -> {
             availableValidator.check(source, availableFoods);
         }).isInstanceOf(NotAvailableFoodException.class);
+    }
+
+    @Test
+    @DisplayName("음료만 주문했을 때")
+    void onlyBeverageValidatorV1() {
+        //given
+        OnlyBeverageValidator onlyBeverageValidator = new OnlyBeverageValidator();
+        List<String> source = List.of("제로콜라-1", "레드와인-19");
+        //then
+        assertThatThrownBy(() -> {
+            onlyBeverageValidator.check(source, availableFoods);
+        }).isInstanceOf(OnlyBeverageException.class);
+    }
+
+    @Test
+    @DisplayName("음료 외 카테고리만 주문했을 때")
+    void onlyBeverageValidatorV2() {
+        //given
+        OnlyBeverageValidator onlyBeverageValidator = new OnlyBeverageValidator();
+        List<String> source = List.of("시저샐러드-1", "타파스-19");
+        //then
+        onlyBeverageValidator.check(source, availableFoods);
     }
 }

@@ -1,4 +1,4 @@
-package seasonSix.chrismas.model;
+package seasonSix.chrismas.model.planner;
 
 import seasonSix.chrismas.model.event.Event;
 

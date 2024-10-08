@@ -1,7 +1,6 @@
 package seasonSix.chrismas.service;
 
-import seasonSix.chrismas.common.Money;
-import seasonSix.chrismas.model.Planner;
+import seasonSix.chrismas.model.planner.Planner;
 import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.repository.EventRepository;

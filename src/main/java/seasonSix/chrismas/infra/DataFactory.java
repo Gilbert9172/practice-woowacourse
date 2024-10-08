@@ -5,6 +5,7 @@ import seasonSix.chrismas.infra.view.message.InputMessage;
 import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.model.food.validator.FoodValidatorFacade;
+import seasonSix.chrismas.model.planner.validator.DateRegexValidator;
 import seasonSix.chrismas.repository.EventRepository;
 import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.service.dto.DateInfoDTO;
@@ -29,7 +30,7 @@ public class DataFactory {
             try {
                 System.out.println(InputMessage.INPUT_DATE);
                 String input = Console.readLine();
-                // TODO : 예외처리
+                DateRegexValidator.check(input);
                 return Integer.parseInt(input);
             } catch (Exception e) {
                 System.out.println("[ERROR]");

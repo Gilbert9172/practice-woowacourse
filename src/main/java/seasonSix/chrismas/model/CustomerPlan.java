@@ -17,9 +17,12 @@ public class CustomerPlan {
         return new CustomerPlan(purchase, payment);
     }
 
-    public CustomerPlan(Map<Food, Integer> purchase, Payment payment) {
+    private CustomerPlan(Map<Food, Integer> purchase, Payment payment) {
         this.purchase = purchase;
         this.payment = payment;
+        this.prizeReceived = false;
+        this.prizeCount = 0;
+        this.badge = Badge.NONE;
     }
 
     public void assignBadge() {
@@ -27,9 +30,10 @@ public class CustomerPlan {
     }
 
     public void isPrizeReceivable() {
-        if ( this.payment.isPrizeReceivable()) {
+        boolean prizeReceivable = this.payment.isPrizeReceivable();
+        if (prizeReceivable) {
             this.prizeReceived = true;
-            this.prizeCount = 1;
+            this.prizeCount ++;
         }
     }
 }

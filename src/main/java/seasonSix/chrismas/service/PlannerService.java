@@ -38,6 +38,6 @@ public class PlannerService {
 
     public CustomerPlan getCustomersTodayPlan(EventManager eventManager, Map<Food, Integer> purchase) {
         Payment payment = pricingSystemService.managingPrice(eventManager, purchase);
-        return customerPlanService.generate(purchase, payment);
+        return customerPlanService.generate(eventManager, purchase, payment);
     }
 }

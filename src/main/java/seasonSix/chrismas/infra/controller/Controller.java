@@ -1,5 +1,6 @@
 package seasonSix.chrismas.infra.controller;
 
+import seasonSix.chrismas.infra.view.PlannerView;
 import seasonSix.chrismas.model.CustomerPlan;
 import seasonSix.chrismas.model.event.EventManager;
 import seasonSix.chrismas.model.planner.Planner;
@@ -33,6 +34,10 @@ public class Controller {
         Planner planner = plannerService.generateForToday(date);
         EventManager eventManager = planner.getEventManager();
         CustomerPlan customersPlan = plannerService.getCustomersTodayPlan(eventManager, orderSheet);
+
+        // planner customsPlan 을 조합해서 View를 만든다.
+        PlannerView plannerView = PlannerView.from(planner, customersPlan);
+        plannerView.hashCode();
         System.out.println("finish");
     }
 }

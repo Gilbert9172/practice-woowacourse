@@ -29,4 +29,8 @@ public class Event {
     public FoodCategory getFoodCategory() {
         return foodCategory;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }

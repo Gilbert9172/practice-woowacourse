@@ -1,10 +1,12 @@
 package seasonSix.chrismas.common;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Money {
 
     public static Money zero = Money.newOne(0);
+    private static DecimalFormat wonFormatter = new DecimalFormat("###,###");
 
     private long val;
 

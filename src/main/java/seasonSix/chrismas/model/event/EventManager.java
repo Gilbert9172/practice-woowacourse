@@ -40,4 +40,8 @@ public class EventManager {
                 .findFirst()
                 .orElseThrow(EventNotFoundException::new);
     }
+
+    public List<Event> getEvents() {
+        return events;
+    }
 }

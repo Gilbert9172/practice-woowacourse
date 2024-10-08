@@ -10,8 +10,6 @@ import seasonSix.chrismas.utils.PriceManagingUtil;
 import java.util.List;
 import java.util.Map;
 
-import static seasonSix.chrismas.model.event.EventPriceTable.MIN_EVENT_APPLY_PRICE;
-
 public class PricingSystemService {
 
     public Payment managingPrice(EventManager manager, Map<Food, Integer> orderSheet) {

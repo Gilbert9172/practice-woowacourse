@@ -28,4 +28,16 @@ public class Payment {
     public Money getOriginalPrice() {
         return originalPrice;
     }
+
+    public Money getBenefitPrice() {
+        return benefitPrice;
+    }
+
+    public Money getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public Money getFinalPrice() {
+        return finalPrice;
+    }
 }

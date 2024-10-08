@@ -1,4 +1,4 @@
-package seasonSix.chrismas.utils;
+package seasonSix.chrismas.infra;
 
 import camp.nextstep.edu.missionutils.Console;
 import seasonSix.chrismas.infra.view.message.InputMessage;
@@ -8,6 +8,8 @@ import seasonSix.chrismas.model.food.validator.FoodValidatorFacade;
 import seasonSix.chrismas.repository.EventRepository;
 import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.service.dto.DateInfoDTO;
+import seasonSix.chrismas.utils.ConvertingUtils;
+import seasonSix.chrismas.utils.DateUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +43,7 @@ public class DataFactory {
             try {
                 System.out.println(InputMessage.INPUT_MENU);
                 String menus = Console.readLine();
-                FoodValidatorFacade.check(menus);
+                FoodValidatorFacade.check(menus, availableFoods);
                 return ConvertingUtils.mapToOrderSheet(menus, availableFoods);
             } catch (Exception e) {
                 System.out.println("[ERROR]");

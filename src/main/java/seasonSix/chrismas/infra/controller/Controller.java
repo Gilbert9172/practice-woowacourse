@@ -2,7 +2,7 @@ package seasonSix.chrismas.infra.controller;
 
 import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.repository.EventRepository;
-import seasonSix.chrismas.utils.DataFactory;
+import seasonSix.chrismas.infra.DataFactory;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.service.PlannerService;

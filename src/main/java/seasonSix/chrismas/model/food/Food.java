@@ -24,4 +24,8 @@ public class Food {
     public Money getMoney() {
         return money;
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -5,14 +5,16 @@ import seasonSix.chrismas.model.food.Food;
 import java.util.List;
 
 public class FoodValidator {
-    private FoodValidator validator = null;
+    private FoodValidator next = null;
 
     public FoodValidator doChain(FoodValidator validator) {
-        this.validator = validator;
-        return this;
+        this.next = validator;
+        return validator;
     }
 
-    public void check(List<String> source) {
-
+    public void check(List<String> source, List<Food> availableFoods) {
+        if (next != null) {
+            next.check(source, availableFoods);
+        }
     }
 }

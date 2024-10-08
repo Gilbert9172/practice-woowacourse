@@ -1,7 +1,7 @@
 package seasonSix.chrismas.utils;
 
 import seasonSix.chrismas.model.food.Food;
-import seasonSix.chrismas.model.food.NotAvailableFoodException;
+import seasonSix.chrismas.model.food.exception.NotAvailableFoodException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,6 +20,12 @@ public class ConvertingUtils {
                 .toList();
     }
 
+    public static List<Integer> mapToFoodCounts(List<String> source) {
+        return source.stream()
+                .map(s -> mapToInteger(s.split("-")[1]))
+                .toList();
+    }
+
     public static Map<Food, Integer> mapToOrderSheet(String source, List<Food> availableFoods) {
         List<String> convertedSource = ConvertingUtils.stringToList(source);
         Map<Food, Integer> foodMap = new HashMap<>();
@@ -34,4 +40,9 @@ public class ConvertingUtils {
         });
         return foodMap;
     }
+
+    public static Integer mapToInteger(String source) {
+        return Integer.parseInt(source);
+    }
+
 }

@@ -1,5 +1,6 @@
 package seasonSix.chrismas.model.event;
 
+import seasonSix.chrismas.common.Money;
 import seasonSix.chrismas.model.food.FoodCategory;
 
 public class WeekendsEvent extends Event{
@@ -9,7 +10,7 @@ public class WeekendsEvent extends Event{
                 EventType.SINGLE,
                 FoodCategory.MAIN,
                 new EventDate(31),
-                2023
+                DiscountTable.WEEKEND.getMoney()
         );
     }
 }

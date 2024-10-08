@@ -21,15 +21,16 @@ import java.util.Optional;
 public class FoodRepository {
 
     private List<Food> foods = new ArrayList<>();
-    public void initializeFoods() {
+
+    public List<Food> initializeFoods() {
         foods = List.of(
                 new MushroomSoup(), new Tapas(), new CaesarSalad(),
                 new TBornStake(), new BbqRip(), new SeafoodPasta(), new ChristmasPasta(),
                 new ChocolateCake(), new IceCream(),
                 new ZeroCoke(), new RedWine(), new Champagne()
         );
+        return foods;
     }
-
 
     public Optional<Food> findByName(String name) {
         return foods.stream().filter(food -> food.isEqualTo(name)).findFirst();

@@ -9,7 +9,7 @@ public class PrizeEvent extends Event {
                 EventType.PRIZE,
                 FoodCategory.ALL,
                 new EventDate(31),
-                120000
+                DiscountTable.PRIZE.getMoney()
         );
     }
 }

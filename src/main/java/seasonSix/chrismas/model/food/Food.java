@@ -20,4 +20,8 @@ public class Food {
     public boolean isEqualTo(String name) {
         return this.name.equals(name);
     }
+
+    public Money getMoney() {
+        return money;
+    }
 }

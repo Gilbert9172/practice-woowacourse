@@ -1,5 +1,6 @@
 package seasonSix.chrismas.model.event;
 
+import seasonSix.chrismas.common.Money;
 import seasonSix.chrismas.model.food.FoodCategory;
 
 public class Event {
@@ -7,13 +8,13 @@ public class Event {
     private EventType type;
     private FoodCategory foodCategory;
     private EventDate eventDate;
-    private long discountAmount;
+    private Money discount;
 
-    public Event(String title, EventType type, FoodCategory foodCategory, EventDate eventDate, long discountAmount) {
+    public Event(String title, EventType type, FoodCategory foodCategory, EventDate eventDate, Money discount) {
         this.title = title;
         this.type = type;
         this.foodCategory = foodCategory;
         this.eventDate = eventDate;
-        this.discountAmount = discountAmount;
+        this.discount = discount;
     }
 }

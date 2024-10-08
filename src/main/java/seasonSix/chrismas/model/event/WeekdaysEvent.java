@@ -9,7 +9,7 @@ public class WeekdaysEvent extends Event {
                 EventType.SINGLE,
                 FoodCategory.DESSERT,
                 new EventDate(31),
-                2023
+                DiscountTable.WEEKDAYS.getMoney()
         );
     }
 }

@@ -10,4 +10,13 @@ public class Order {
     private Money originalPayment;
     private Money totalDiscount;
     private Money finalPayment;
+
+
+
+    public Order(Map<Food, Integer> menu, Money originalPayment, Money totalDiscount, Money finalPayment) {
+        this.menu = menu;
+        this.originalPayment = originalPayment;
+        this.totalDiscount = totalDiscount;
+        this.finalPayment = finalPayment;
+    }
 }

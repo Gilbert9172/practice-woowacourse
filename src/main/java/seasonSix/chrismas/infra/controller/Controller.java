@@ -31,9 +31,10 @@ public class Controller {
 
     public void choosePlanner() {
         // Initialize
-        DataFactory dataFactory = new DataFactory(foodRepository, eventRepository);
+        DataFactory dataFactory = new DataFactory();
         int date = dataFactory.generateDate();
-        Map<Food, Integer> purchase = dataFactory.generateOderSheet();
+        List<Food> foods = foodRepository.initializeFoods();
+        Map<Food, Integer> purchase = dataFactory.generateOderSheet(foods);
 
         // Generate models
         Order order = Order.newOne(purchase, date);

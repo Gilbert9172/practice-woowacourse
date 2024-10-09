@@ -6,8 +6,6 @@ import seasonSix.chrismas.infra.view.message.InputMessage;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.model.food.validator.FoodValidatorFacade;
 import seasonSix.chrismas.model.planner.validator.DateRegexValidator;
-import seasonSix.chrismas.repository.EventRepository;
-import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.utils.ConvertingUtils;
 
 import java.util.List;
@@ -17,14 +15,6 @@ import static seasonSix.chrismas.infra.view.message.ErrorMessage.DATE_ERROR_MESS
 import static seasonSix.chrismas.infra.view.message.ErrorMessage.FOOD_ERROR_MESSAGE;
 
 public class DataFactory {
-
-    private final FoodRepository foodRepository;
-    private final EventRepository eventRepository;
-
-    public DataFactory(FoodRepository foodRepository, EventRepository eventRepository) {
-        this.foodRepository = foodRepository;
-        this.eventRepository = eventRepository;
-    }
 
     public int generateDate() {
         while (true) {
@@ -39,8 +29,7 @@ public class DataFactory {
         }
     }
 
-    public Map<Food, Integer> generateOderSheet() {
-        List<Food> availableFoods = this.generateFoods();
+    public Map<Food, Integer> generateOderSheet(List<Food> availableFoods) {
         while (true) {
             try {
                 System.out.println(InputMessage.INPUT_MENU);
@@ -51,9 +40,5 @@ public class DataFactory {
                 System.out.println(FOOD_ERROR_MESSAGE);
             }
         }
-    }
-
-    public List<Food> generateFoods() {
-        return foodRepository.initializeFoods();
     }
 }

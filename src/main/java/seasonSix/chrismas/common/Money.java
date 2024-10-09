@@ -3,7 +3,7 @@ package seasonSix.chrismas.common;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     public static Money zero = Money.newOne(0);
     private static DecimalFormat wonFormatter = new DecimalFormat("###,###");
@@ -63,5 +63,16 @@ public class Money {
         }
         Money money = (Money) obj;
         return money.getVal() == this.val;
+    }
+
+    @Override
+    public int compareTo(Money o) {
+        if (this.val > o.getVal()) {
+            return 1;
+        }
+        if (this.val == o.getVal()) {
+            return 0;
+        }
+        return -1;
     }
 }

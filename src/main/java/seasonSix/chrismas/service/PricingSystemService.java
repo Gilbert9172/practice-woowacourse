@@ -5,7 +5,7 @@ import seasonSix.chrismas.model.Order;
 import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.event.EventManager;
 import seasonSix.chrismas.model.food.Food;
-import seasonSix.chrismas.service.dto.Payment;
+import seasonSix.chrismas.model.Payment;
 import seasonSix.chrismas.utils.ConvertingUtils;
 import seasonSix.chrismas.utils.PriceManagingUtil;
 

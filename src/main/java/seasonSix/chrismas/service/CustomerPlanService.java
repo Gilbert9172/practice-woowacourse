@@ -2,12 +2,8 @@ package seasonSix.chrismas.service;
 
 import seasonSix.chrismas.model.CustomerPlan;
 import seasonSix.chrismas.model.Order;
-import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.event.EventManager;
-import seasonSix.chrismas.model.food.Food;
-import seasonSix.chrismas.service.dto.Payment;
-
-import java.util.List;
+import seasonSix.chrismas.model.Payment;
 
 public class CustomerPlanService {
 

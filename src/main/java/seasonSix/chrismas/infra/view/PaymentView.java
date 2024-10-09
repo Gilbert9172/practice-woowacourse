@@ -1,6 +1,6 @@
 package seasonSix.chrismas.infra.view;
 
-import seasonSix.chrismas.service.dto.Payment;
+import seasonSix.chrismas.model.Payment;
 import seasonSix.chrismas.utils.ConvertingUtils;
 
 import java.util.HashMap;

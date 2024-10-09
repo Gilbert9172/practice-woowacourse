@@ -1,4 +1,4 @@
-package seasonSix.chrismas.service.dto;
+package seasonSix.chrismas.model;
 
 import seasonSix.chrismas.common.Money;
 import seasonSix.chrismas.model.event.Event;

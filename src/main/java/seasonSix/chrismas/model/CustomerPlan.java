@@ -3,7 +3,6 @@ package seasonSix.chrismas.model;
 import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.event.EventManager;
 import seasonSix.chrismas.model.food.Food;
-import seasonSix.chrismas.service.dto.Payment;
 
 import java.util.ArrayList;
 import java.util.List;

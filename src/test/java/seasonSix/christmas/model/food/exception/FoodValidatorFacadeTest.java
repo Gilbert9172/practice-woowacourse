@@ -46,9 +46,11 @@ public class FoodValidatorFacadeTest {
     @DisplayName("통합 테스트2")
     void foodValidatorFacadeTestV2() {
         //given
-        String source = "제로콜라-1,시저샐러드-1";
+        String source = "제로콜라-a";
         //then
-        FoodValidatorFacade.check(source, availableFoods);
+        assertThatThrownBy(() -> {
+            FoodValidatorFacade.check(source, availableFoods);
+        }).isInstanceOf(NotAvailableFormatException.class);
     }
 
     @Test
@@ -71,6 +73,18 @@ public class FoodValidatorFacadeTest {
         List<String> source = List.of("시저샐러드-1", "양송이스푸-1");
         //then
         regexValidator.check(source, availableFoods);
+    }
+
+    @Test
+    @DisplayName("형식 확인 - [한글]-[a]")
+    void regexValidatorTestV3() {
+        //given
+        RegexValidator regexValidator = new RegexValidator();
+        List<String> source = List.of("제로콜라-a");
+        //then
+        assertThatThrownBy(() -> {
+            regexValidator.check(source, availableFoods);
+        }).isInstanceOf(NotAvailableFormatException.class);
     }
 
     @Test

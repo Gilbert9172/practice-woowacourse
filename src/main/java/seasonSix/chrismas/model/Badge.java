@@ -21,6 +21,10 @@ public enum Badge {
         this.title = title;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public static Badge assignBy(Money money) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> money.boeThan(badge.limitMoney))

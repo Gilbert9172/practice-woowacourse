@@ -70,12 +70,12 @@ public class ConvertingUtils {
         ));
     }
 
-    public static Map<String, Long> mapToStringLongMap(Map<Event, Money> source) {
+    public static Map<String, String> mapToStringMap(Map<Event, Money> source) {
         return source.entrySet()
                 .stream()
                 .collect(Collectors.toMap(
                         entry -> entry.getKey().getTitle(),
-                        entry -> entry.getValue().getVal()
+                        entry -> entry.getValue().toWon()
                 ));
     }
 }

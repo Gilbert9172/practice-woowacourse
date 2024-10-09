@@ -12,6 +12,7 @@ import seasonSix.chrismas.model.planner.Planner;
 import seasonSix.chrismas.repository.EventRepository;
 import seasonSix.chrismas.repository.FoodRepository;
 import seasonSix.chrismas.service.PlannerService;
+import seasonSix.chrismas.utils.OutputUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,8 @@ public class Controller {
 
         // Generate View
         CustomerPlanView customerPlanView = CustomerPlanView.from(customersPlan);
-        customerPlanView.toString();
-        System.out.println("test");
+
+        // Output
+        OutputUtil.printResult(customerPlanView);
     }
 }

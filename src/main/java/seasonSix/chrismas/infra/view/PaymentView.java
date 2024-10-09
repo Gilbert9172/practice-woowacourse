@@ -8,24 +8,24 @@ import java.util.Map;
 
 public class PaymentView {
 
-    private long originalPrice;
-    private long benefitPrice;
-    private long discountPrice;
-    private long finalPrice;
-    private Map<String, Long> eventPrices = new HashMap<>();
+    private String originalPrice;
+    private String benefitPrice;
+    private String discountPrice;
+    private String finalPrice;
+    private Map<String, String> eventPrices = new HashMap<>();
 
     public static PaymentView from(Payment payment) {
 
         return new PaymentView(
-                payment.getOriginalPrice().getVal(),
-                payment.getBenefitPrice().getVal(),
-                payment.getDiscountPrice().getVal(),
-                payment.getFinalPrice().getVal(),
-                ConvertingUtils.mapToStringLongMap(payment.getEventPrices())
+                payment.getOriginalPrice().toWon(),
+                payment.getBenefitPrice().toWon(),
+                payment.getDiscountPrice().toWon(),
+                payment.getFinalPrice().toWon(),
+                ConvertingUtils.mapToStringMap(payment.getEventPrices())
         );
     }
 
-    private PaymentView(long originalPrice, long benefitPrice, long discountPrice, long finalPrice, Map<String, Long> eventPrices) {
+    private PaymentView(String originalPrice, String benefitPrice, String discountPrice, String finalPrice, Map<String, String> eventPrices) {
         this.originalPrice = originalPrice;
         this.benefitPrice = benefitPrice;
         this.discountPrice = discountPrice;
@@ -33,23 +33,23 @@ public class PaymentView {
         this.eventPrices = eventPrices;
     }
 
-    public long getOriginalPrice() {
+    public String getOriginalPrice() {
         return originalPrice;
     }
 
-    public long getBenefitPrice() {
+    public String getBenefitPrice() {
         return benefitPrice;
     }
 
-    public long getDiscountPrice() {
+    public String getDiscountPrice() {
         return discountPrice;
     }
 
-    public long getFinalPrice() {
+    public String getFinalPrice() {
         return finalPrice;
     }
 
-    public Map<String, Long> getEventPrices() {
+    public Map<String, String> getEventPrices() {
         return eventPrices;
     }
 }

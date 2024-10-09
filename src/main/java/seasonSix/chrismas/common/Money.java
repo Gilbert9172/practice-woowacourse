@@ -53,6 +53,10 @@ public class Money implements Comparable<Money> {
         return Money.newOne(amount);
     }
 
+    public String toWon() {
+        return wonFormatter.format(this.val);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

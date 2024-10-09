@@ -9,6 +9,7 @@ import seasonSix.chrismas.model.food.beverage.RedWine;
 import seasonSix.chrismas.model.food.beverage.ZeroCoke;
 import seasonSix.chrismas.model.food.dessert.ChocolateCake;
 import seasonSix.chrismas.model.food.dessert.IceCream;
+import seasonSix.chrismas.model.food.exception.NotAvailableFoodException;
 import seasonSix.chrismas.model.food.main.ChristmasPasta;
 import seasonSix.chrismas.model.food.main.SeafoodPasta;
 import seasonSix.chrismas.model.food.main.TBornStake;
@@ -20,19 +21,20 @@ import java.util.Optional;
 
 public class FoodRepository {
 
-    private List<Food> foods = new ArrayList<>();
+    private static List<Food> foods = List.of(
+            new MushroomSoup(), new Tapas(), new CaesarSalad(),
+            new TBornStake(), new BbqRip(), new SeafoodPasta(), new ChristmasPasta(),
+            new ChocolateCake(), new IceCream(),
+            new ZeroCoke(), new RedWine(), new Champagne()
+    );
 
     public List<Food> initializeFoods() {
-        foods = List.of(
-                new MushroomSoup(), new Tapas(), new CaesarSalad(),
-                new TBornStake(), new BbqRip(), new SeafoodPasta(), new ChristmasPasta(),
-                new ChocolateCake(), new IceCream(),
-                new ZeroCoke(), new RedWine(), new Champagne()
-        );
         return foods;
     }
 
-    public Optional<Food> findByName(String name) {
-        return foods.stream().filter(food -> food.isEqualTo(name)).findFirst();
+    public Optional<Food> findPrizeFood() {
+        return foods.stream()
+                .filter(Food::isPrize)
+                .findFirst();
     }
 }

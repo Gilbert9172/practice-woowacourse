@@ -1,28 +1,40 @@
 package seasonSix.chrismas.service.dto;
 
 import seasonSix.chrismas.common.Money;
+import seasonSix.chrismas.model.event.Event;
+import seasonSix.chrismas.utils.PriceManagingUtil;
 
-import static seasonSix.chrismas.model.event.EventPriceTable.MIN_RECEIVABLE_PRICE;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Payment {
-    Money originalPrice;
-    Money benefitPrice;
-    Money discountPrice;
-    Money finalPrice;
 
-    public static Payment newOne(Money originalPrice, Money benefitPrice, Money discountPrice) {
-        return new Payment(originalPrice, benefitPrice, discountPrice);
-    }
+    private Money originalPrice;
+    private Money benefitPrice;
+    private Money discountPrice;
+    private Money finalPrice;
 
-    private Payment(Money originalPrice, Money benefitPrice, Money discountPrice) {
+    Map<Event, Money> eventPrices = new HashMap<>();
+
+    private Payment(Money originalPrice, Money benefitPrice, Money discountPrice, Money finalPrice, Map<Event, Money> eventPrices) {
         this.originalPrice = originalPrice;
         this.benefitPrice = benefitPrice;
         this.discountPrice = discountPrice;
-        this.finalPrice = originalPrice.minus(discountPrice);
+        this.finalPrice = finalPrice;
+        this.eventPrices = eventPrices;
     }
 
-    public boolean isPrizeReceivable() {
-        return this.originalPrice.boeThan(MIN_RECEIVABLE_PRICE.getMoney());
+    public static Payment newOne(Money originalPrice, Map<Event, Money> eventPrices) {
+        Money totalBenefitPrice = PriceManagingUtil.totalBenefitPrice(eventPrices);
+        Money totalDiscountPrice = PriceManagingUtil.totalDiscountPrice(eventPrices);
+        Money finalPrice = PriceManagingUtil.getFinalPrice(originalPrice, eventPrices);
+        return new Payment(
+                originalPrice,
+                totalBenefitPrice,
+                totalDiscountPrice,
+                finalPrice,
+                eventPrices
+        );
     }
 
     public Money getOriginalPrice() {
@@ -39,5 +51,9 @@ public class Payment {
 
     public Money getFinalPrice() {
         return finalPrice;
+    }
+
+    public Map<Event, Money> getEventPrices() {
+        return eventPrices;
     }
 }

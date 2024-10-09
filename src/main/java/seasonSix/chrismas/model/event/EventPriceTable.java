@@ -10,7 +10,7 @@ public enum EventPriceTable {
     CHRISTMAS_DEFAULT(Money.newOne(1000)),
     CHRISTMAS_DAILY(Money.newOne(100)),
     MIN_EVENT_APPLY_PRICE(Money.newOne(10000)),
-    MIN_RECEIVABLE_PRICE(Money.newOne(120000));
+    MINP_PRIZE_RECEIVABLE_PRICE(Money.newOne(120000));
     ;
 
     private final Money money;
@@ -21,5 +21,13 @@ public enum EventPriceTable {
 
     public Money getMoney() {
         return money;
+    }
+
+    public static Money minEventApplyPrice() {
+        return MIN_EVENT_APPLY_PRICE.money;
+    }
+
+    public static Money minPrizeReceivablePrice() {
+        return MINP_PRIZE_RECEIVABLE_PRICE.money;
     }
 }

@@ -10,24 +10,25 @@ public class Planner {
     private boolean isWeekend;
     private boolean isSpecialDay;
 
-    private EventManager eventManager;
-
-    public static Planner newOne(int date, boolean isWeekend, boolean isSpecialDay, List<Event> events) {
-        return new Planner(date, isWeekend, isSpecialDay, new EventManager(events));
+    public static Planner newOne(int date, boolean isWeekend, boolean isSpecialDay) {
+        return new Planner(date, isWeekend, isSpecialDay);
     }
 
-    private Planner(int date, boolean isWeekend, boolean isSpecialDay, EventManager eventManager) {
+    public Planner(int date, boolean isWeekend, boolean isSpecialDay) {
         this.date = date;
         this.isWeekend = isWeekend;
         this.isSpecialDay = isSpecialDay;
-        this.eventManager = eventManager;
     }
 
     public int getDate() {
         return date;
     }
 
-    public EventManager getEventManager() {
-        return eventManager;
+    public boolean isWeekend() {
+        return isWeekend;
+    }
+
+    public boolean isSpecialDay() {
+        return isSpecialDay;
     }
 }

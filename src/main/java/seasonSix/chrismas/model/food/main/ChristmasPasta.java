@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class ChristmasPasta extends Food {
     public ChristmasPasta() {
-        super("크리스마스파스타", Money.newOne(25000), FoodCategory.MAIN);
+        super("크리스마스파스타", Money.newOne(25000), FoodCategory.MAIN, false);
     }
 }

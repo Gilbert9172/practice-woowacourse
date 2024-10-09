@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class ChocolateCake extends Food {
     public ChocolateCake() {
-        super("초코케이크", Money.newOne(15000), FoodCategory.DESSERT);
+        super("초코케이크", Money.newOne(15000), FoodCategory.DESSERT, false);
     }
 }

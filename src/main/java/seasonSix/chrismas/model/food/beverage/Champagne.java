@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class Champagne extends Food {
     public Champagne() {
-        super("샴페인", Money.newOne(25000), FoodCategory.BEVERAGE);
+        super("샴페인", Money.newOne(25000), FoodCategory.BEVERAGE, true);
     }
 }

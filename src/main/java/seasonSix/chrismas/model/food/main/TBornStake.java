@@ -6,7 +6,7 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class TBornStake extends Food {
     public TBornStake() {
-        super("티본스테이크", Money.newOne(55000), FoodCategory.MAIN);
+        super("티본스테이크", Money.newOne(55000), FoodCategory.MAIN, false);
 
     }
 }

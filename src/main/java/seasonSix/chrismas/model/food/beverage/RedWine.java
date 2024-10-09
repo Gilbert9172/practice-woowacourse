@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class RedWine extends Food {
     public RedWine() {
-        super("레드와인", Money.newOne(60000), FoodCategory.BEVERAGE);
+        super("레드와인", Money.newOne(60000), FoodCategory.BEVERAGE, false);
     }
 }

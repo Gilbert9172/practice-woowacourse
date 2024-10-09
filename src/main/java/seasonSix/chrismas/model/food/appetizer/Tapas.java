@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class Tapas extends Food {
     public Tapas() {
-        super("타파스", Money.newOne(5500), FoodCategory.APPETIZER);
+        super("타파스", Money.newOne(5500), FoodCategory.APPETIZER, false);
     }
 }

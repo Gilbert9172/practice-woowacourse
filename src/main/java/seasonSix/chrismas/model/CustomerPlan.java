@@ -1,7 +1,7 @@
 package seasonSix.chrismas.model;
 
 import seasonSix.chrismas.model.event.Event;
-import seasonSix.chrismas.model.event.EventPriceTable;
+import seasonSix.chrismas.model.event.EventManager;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.service.dto.Payment;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class CustomerPlan {
 
-    private Map<Food, Integer> purchase;
+    private Order order;
     private Payment payment;
     private boolean prizeReceived;
     private String prizeName;
@@ -20,37 +20,32 @@ public class CustomerPlan {
     private Badge badge;
     private List<Event> appliedEvents = new ArrayList<>();
 
-    public static CustomerPlan newOne(Map<Food, Integer> purchase, Payment payment) {
-        return new CustomerPlan(purchase, payment);
-    }
-
-    private CustomerPlan(Map<Food, Integer> purchase, Payment payment) {
-        this.purchase = purchase;
+    private CustomerPlan(Order order, Payment payment, List<Event> events) {
+        this.order = order;
         this.payment = payment;
         this.badge = Badge.NONE;
+        this.appliedEvents = events;
     }
 
-    public void assignAppliedEvents(List<Event> events) {
-        if (payment.getOriginalPrice().boeThan(EventPriceTable.MIN_EVENT_APPLY_PRICE.getMoney())) {
-            this.appliedEvents = events;
-        }
+    public static CustomerPlan newOne(Order order, Payment payment, List<Event> events) {
+        return new CustomerPlan(order, payment, events);
     }
 
     public void assignBadge() {
-        this.badge = Badge.assignBy(this.payment.getOriginalPrice());
+        this.badge = Badge.assignBy(order.getOriginalPrice());
     }
 
-    public void isPrizeReceivable(Food food) {
-        boolean prizeReceivable = this.payment.isPrizeReceivable();
-        if (prizeReceivable) {
+    public void receivePrizeIfNecessary(Food prize) {
+        boolean canReceivePrize = EventManager.canReceivePrize(order.getOriginalPrice());
+        if (canReceivePrize) {
             this.prizeReceived = true;
-            this.prizeName = food.getName();
+            this.prizeName = prize.getName();
             this.prizeCount ++;
         }
     }
 
     public Map<String, Integer> getPurchase() {
-        return purchase.entrySet()
+        return order.getPurchase().entrySet()
                 .stream()
                 .collect(Collectors.toMap(
                         entry -> entry.getKey().getName(), Map.Entry::getValue)
@@ -71,13 +66,5 @@ public class CustomerPlan {
 
     public String getPrizeName() {
         return prizeName;
-    }
-
-    public String getAppliedEvents() {
-        if (appliedEvents.isEmpty()) {
-            return "없음";
-        }
-        List<String> eventTitles = appliedEvents.stream().map(Event::getTitle).toList();
-        return String.join(",", eventTitles);
     }
 }

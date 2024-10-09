@@ -3,7 +3,6 @@ package seasonSix.chrismas.utils;
 import seasonSix.chrismas.common.MagicNums;
 import seasonSix.chrismas.common.Money;
 import seasonSix.chrismas.model.event.Event;
-import seasonSix.chrismas.model.event.PrizeEvent;
 import seasonSix.chrismas.model.food.Food;
 
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.Map;
 
 import static seasonSix.chrismas.model.event.EventPriceTable.CHRISTMAS_DAILY;
 import static seasonSix.chrismas.model.event.EventPriceTable.CHRISTMAS_DEFAULT;
+import static seasonSix.chrismas.model.event.EventType.isPrizeType;
 
 public class PriceManagingUtil {
 
@@ -24,41 +24,51 @@ public class PriceManagingUtil {
         return  dailyDiscount.add(defaultDiscount);
     }
 
-    public static Money originalPrice(Map<Food, Integer> orderSheet) {
-        List<Money> moneyList = orderSheet.entrySet()
+    public static Money originalPrice(Map<Food, Integer> purchase) {
+        List<Money> moneyList = purchase.entrySet()
                 .stream()
                 .map(food -> food.getKey().getMoney().multiply(food.getValue()))
                 .toList();
         return Money.addAll(moneyList);
     }
 
-    public static Money benefitPriceByEachFood(Map<Food, Integer> orderSheet, Event event) {
-        List<Money> moneyList = orderSheet.entrySet()
+    public static Map<Event, Money> benefitPriceByEachFood(Map<Food, Integer> purchase, Event event) {
+        List<Money> moneyList = purchase.entrySet()
                 .stream()
                 .map(entry -> {
                     Food food = entry.getKey();
                     Integer amount = entry.getValue();
                     if (food.getFoodCategory().equals(event.getFoodCategory())) {
-                        Money originalPrice = food.getMoney().multiply(amount);
-                        Money discount = event.getDiscount().multiply(amount);
-                        return originalPrice.minus(discount);
+                        return event.getDiscount().multiply(amount);
                     }
                     return Money.zero;
                 }).toList();
+        Money totalPrice = Money.addAll(moneyList);
+        return Map.of(event, totalPrice);
+    }
+
+    public static Money totalBenefitPrice(Map<Event, Money> eventPrices) {
+        List<Money> moneyList = eventPrices.values()
+                .stream()
+                .toList();
         return Money.addAll(moneyList);
     }
 
-    public static Money benefitPriceForAllFood(List<Event> events) {
-        Money benefitPrice = Money.zero;
-        events.forEach(event -> benefitPrice.add(event.getDiscount()));
-        return benefitPrice;
+    public static Money totalDiscountPrice(Map<Event, Money> eventPrices) {
+        List<Money> moneyList = eventPrices.entrySet()
+                .stream()
+                .filter(entry -> !isPrizeType(entry.getKey().getType()))
+                .map(Map.Entry::getValue)
+                .toList();
+        return Money.addAll(moneyList);
     }
 
-    public static Money discountPrice(Money originalPrice, Money benefitPrice, Event event) {
-        Money prizePrice = event.getDiscount();
-        if (originalPrice.boeThan(PrizeEvent.minReceivablePrice)) {
-            return benefitPrice.minus(prizePrice);
-        }
-        return benefitPrice;
+    public static Money getFinalPrice(Money originalPrice, Map<Event, Money> eventPrices) {
+        List<Money> moneyList = eventPrices.entrySet()
+                .stream()
+                .filter(entry -> !isPrizeType(entry.getKey().getType()))
+                .map(Map.Entry::getValue)
+                .toList();
+        return originalPrice.minus(Money.addAll(moneyList));
     }
 }

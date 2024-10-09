@@ -9,12 +9,15 @@ public class Food {
 
     private FoodCategory foodCategory;
 
+    private boolean isPrize;
+
     public Food() {}
 
-    public Food(String name, Money money, FoodCategory foodCategory) {
+    public Food(String name, Money money, FoodCategory foodCategory, boolean isPrize) {
         this.name = name;
         this.money = money;
         this.foodCategory = foodCategory;
+        this.isPrize = isPrize;
     }
 
     public boolean isEqualTo(String name) {
@@ -31,5 +34,9 @@ public class Food {
 
     public FoodCategory getFoodCategory() {
         return foodCategory;
+    }
+
+    public boolean isPrize() {
+        return isPrize;
     }
 }

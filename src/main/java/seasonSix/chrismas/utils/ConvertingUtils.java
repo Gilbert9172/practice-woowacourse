@@ -1,10 +1,13 @@
 package seasonSix.chrismas.utils;
 
+import seasonSix.chrismas.common.Money;
+import seasonSix.chrismas.model.event.Event;
 import seasonSix.chrismas.model.food.Food;
 import seasonSix.chrismas.model.food.exception.NotAvailableFoodException;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ConvertingUtils {
 
@@ -47,5 +50,32 @@ public class ConvertingUtils {
         return source.stream()
                 .map(s -> s.split("-")[0])
                 .collect(Collectors.toSet());
+    }
+
+    public static Map<Event, Money> mapToMap(List<Event> events) {
+        return events.stream()
+                .collect(Collectors.toMap(
+                        event -> event,
+                        Event::getDiscount
+                ));
+    }
+
+    public static Map<Event, Money> mergeMap(Map<Event, Money> left, Map<Event, Money> right) {
+        return Stream.concat(
+                left.entrySet().stream(),
+                right.entrySet().stream()
+        ).collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue
+        ));
+    }
+
+    public static Map<String, Long> mapToStringLongMap(Map<Event, Money> source) {
+        return source.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getTitle(),
+                        entry -> entry.getValue().getVal()
+                ));
     }
 }

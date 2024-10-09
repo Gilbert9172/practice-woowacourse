@@ -6,6 +6,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 
 public class BbqRip extends Food {
     public BbqRip() {
-        super("바비큐립", Money.newOne(54000), FoodCategory.MAIN);
+        super("바비큐립", Money.newOne(54000), FoodCategory.MAIN, false);
     }
 }

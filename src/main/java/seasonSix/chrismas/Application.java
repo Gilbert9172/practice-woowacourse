@@ -17,7 +17,7 @@ public class Application {
         EventRepository eventRepository = new EventRepository();
         FoodRepository foodRepository = new FoodRepository();
         PricingSystemService pricingSystemService = new PricingSystemService();
-        CustomerPlanService customerPlanService = new CustomerPlanService(foodRepository);
+        CustomerPlanService customerPlanService = new CustomerPlanService();
         PlannerService plannerService = new PlannerService(eventRepository, pricingSystemService, customerPlanService);
         return new Controller(plannerService, foodRepository, eventRepository);
     }

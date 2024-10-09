@@ -7,6 +7,6 @@ import seasonSix.chrismas.model.food.FoodCategory;
 public class CaesarSalad extends Food {
 
     public CaesarSalad() {
-        super("시저샐러드", Money.newOne(8000), FoodCategory.APPETIZER);
+        super("시저샐러드", Money.newOne(8000), FoodCategory.APPETIZER, false);
     }
 }

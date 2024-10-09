@@ -1,13 +1,12 @@
 package seasonSix.chrismas.infra.view;
 
 import seasonSix.chrismas.model.CustomerPlan;
-import seasonSix.chrismas.model.planner.Planner;
-import seasonSix.chrismas.service.dto.Payment;
 
 import java.util.Map;
 
 public class CustomerPlanView {
 
+    private int date;
     private Map<String, Integer> purchase;
     private String prizeName;
     private int prizeCount;
@@ -21,6 +20,7 @@ public class CustomerPlanView {
     public static CustomerPlanView from(CustomerPlan customerPlan) {
         PaymentView paymentView = PaymentView.from(customerPlan.getPayment());
         return new CustomerPlanView(
+                customerPlan.getOrderDate(),
                 customerPlan.getPurchase(),
                 customerPlan.getPrizeName(),
                 customerPlan.getPrizeCount(),
@@ -33,7 +33,8 @@ public class CustomerPlanView {
         );
     }
 
-    private CustomerPlanView(Map<String, Integer> purchase,
+    private CustomerPlanView(int date,
+                            Map<String, Integer> purchase,
                              String prizeName,
                              int prizeCount,
                              String badge,
@@ -42,6 +43,7 @@ public class CustomerPlanView {
                              long discountPrice,
                              long finalPrice,
                              Map<String, Long> events) {
+        this.date = date;
         this.purchase = purchase;
         this.prizeName = prizeName;
         this.prizeCount = prizeCount;

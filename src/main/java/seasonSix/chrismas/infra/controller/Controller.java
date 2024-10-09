@@ -35,7 +35,7 @@ public class Controller {
         Map<Food, Integer> purchase = dataFactory.generateOderSheet();
 
         // Generate models
-        Order order = Order.newOne(purchase);
+        Order order = Order.newOne(purchase, date);
         List<Event> todayEvents = eventRepository.findTodayEvents(date, order);
         Food prizeFood = foodRepository.findPrizeFood().orElseThrow(NotAvailableFoodException::new);
         EventManager eventManager = EventManager.newOne(todayEvents, prizeFood);

@@ -10,14 +10,16 @@ import java.util.Map;
 public class Order {
     private Map<Food, Integer> purchase = new HashMap<>();
     private Money originalPrice;
+    private int date;
 
-    private Order(Map<Food, Integer> purchase) {
+    private Order(Map<Food, Integer> purchase, int date) {
         this.purchase = purchase;
         this.originalPrice = PriceManagingUtil.originalPrice(purchase);
+        this.date = date;
     }
 
-    public static Order newOne(Map<Food, Integer> purchase) {
-        return new Order(purchase);
+    public static Order newOne(Map<Food, Integer> purchase, int date) {
+        return new Order(purchase, date);
     }
 
     public Map<Food, Integer> getPurchase() {
@@ -26,5 +28,9 @@ public class Order {
 
     public Money getOriginalPrice() {
         return originalPrice;
+    }
+
+    public int getDate() {
+        return date;
     }
 }

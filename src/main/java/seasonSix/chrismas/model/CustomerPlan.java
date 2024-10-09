@@ -67,4 +67,8 @@ public class CustomerPlan {
     public String getPrizeName() {
         return prizeName;
     }
+
+    public int getOrderDate() {
+        return order.getDate();
+    }
 }

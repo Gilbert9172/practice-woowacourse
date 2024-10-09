@@ -25,7 +25,7 @@ public enum Badge {
     public static Badge assignBy(Money money) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> money.boeThan(badge.limitMoney))
-                .sorted(Comparator.comparingInt(badge -> Math.toIntExact(badge.limitMoney.getVal())))
+                .sorted(Comparator.comparingLong(badge -> badge.limitMoney.getVal()))
                 .reduce((first, second) -> second)
                 .orElse(NONE);
     }

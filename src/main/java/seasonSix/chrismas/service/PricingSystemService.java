@@ -15,11 +15,15 @@ import java.util.Map;
 public class PricingSystemService {
 
     public Payment managingPrice(EventManager manager, Order order) {
+        Money originalPrice = order.getOriginalPrice();
+        if (!EventManager.canApplyEvents(originalPrice)) {
+            return Payment.noEventApplied(originalPrice);
+        }
         Map<Food, Integer> purchase = order.getPurchase();
         Map<Event, Money> weekTargetEventPrice = weekTargetEventPrice(manager, purchase);
         Map<Event, Money> allTargetEventPrice = allTargetEventPrice(manager);
         Map<Event, Money> eventPrices = ConvertingUtils.mergeMap(weekTargetEventPrice, allTargetEventPrice);
-        return Payment.newOne(order.getOriginalPrice(), eventPrices);
+        return Payment.newOne(originalPrice, eventPrices);
     }
 
     public Map<Event, Money> weekTargetEventPrice(EventManager manager, Map<Food, Integer> purchase) {

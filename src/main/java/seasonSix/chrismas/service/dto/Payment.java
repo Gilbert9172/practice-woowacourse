@@ -24,6 +24,10 @@ public class Payment {
         this.eventPrices = eventPrices;
     }
 
+    public static Payment noEventApplied(Money originalPrice) {
+        return new Payment(originalPrice, Money.zero, Money.zero, Money.zero, Map.of());
+    }
+
     public static Payment newOne(Money originalPrice, Map<Event, Money> eventPrices) {
         Money totalBenefitPrice = PriceManagingUtil.totalBenefitPrice(eventPrices);
         Money totalDiscountPrice = PriceManagingUtil.totalDiscountPrice(eventPrices);

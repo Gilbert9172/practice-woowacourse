@@ -68,11 +68,11 @@ public class Money implements Comparable<Money> {
     @Override
     public int compareTo(Money o) {
         if (this.val > o.getVal()) {
-            return 1;
+            return -1;
         }
         if (this.val == o.getVal()) {
             return 0;
         }
-        return -1;
+        return 1;
     }
 }

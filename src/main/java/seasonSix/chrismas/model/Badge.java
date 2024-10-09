@@ -1,6 +1,5 @@
 package seasonSix.chrismas.model;
 
-import com.sun.source.tree.Tree;
 import seasonSix.chrismas.common.Money;
 
 import java.util.Arrays;
@@ -25,8 +24,9 @@ public enum Badge {
     public static Badge assignBy(Money money) {
         return Arrays.stream(Badge.values())
                 .filter(badge -> money.boeThan(badge.limitMoney))
-                .sorted(Comparator.comparingLong(badge -> badge.limitMoney.getVal()))
-                .reduce((first, second) -> second)
+                .sorted(Comparator.comparing(badge -> badge.limitMoney))
+                .reduce((high, low) -> high)
                 .orElse(NONE);
+
     }
 }

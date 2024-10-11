@@ -1,13 +1,12 @@
 package seasonSix.lotto.model.lotto;
 
-import seasonSix.lotto.common.Money;
-
 import java.util.List;
 
 public class Lotto {
-    public static Money price = Money.newOne(1000L);
 
-    private final List<Integer> numbers;
+    private List<Integer> numbers;
+    private boolean isChecked;
+    private Rank rank;
 
 
     public static Lotto newOne(List<Integer> numbers) {
@@ -17,6 +16,7 @@ public class Lotto {
     private Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
+        this.rank = Rank.NONE;
     }
 
     private void validate(List<Integer> numbers) {

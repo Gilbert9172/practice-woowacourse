@@ -2,12 +2,10 @@ package seasonSix.lotto.model;
 
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.common.utils.LottoGenerateUtil;
+import seasonSix.lotto.infra.validator.InputFacadeValidator;
 import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seasonSix.lotto.common.message.ErrorMessage.SHOULD_NOT_BE_NULL;
 
 public class GameManager {
 
@@ -15,13 +13,14 @@ public class GameManager {
     private Lotto lotto;
     private Integer bonusNumber;
 
-    private GameManager(Lotto lotto, Integer bonusNumber) {
-        this.lotto = requireNonNull(lotto, SHOULD_NOT_BE_NULL);
-        this.bonusNumber = requireNonNull(bonusNumber, SHOULD_NOT_BE_NULL);
+    private GameManager(List<Integer> numbers, Integer bonusNumber) {
+        InputFacadeValidator.checkBonusNumber(bonusNumber, numbers);
+        this.lotto = Lotto.newOne(numbers);
+        this.bonusNumber = bonusNumber;
     }
 
-    public static GameManager newOne(Lotto lotto, Integer bonusNumber) {
-        return new GameManager(lotto, bonusNumber);
+    public static GameManager newOne(List<Integer> numbers, Integer bonusNumber) {
+        return new GameManager(numbers, bonusNumber);
     }
 
     public List<Lotto> generateLottos(Long purchasePrice) {

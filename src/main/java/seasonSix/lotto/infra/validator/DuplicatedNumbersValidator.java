@@ -1,21 +1,19 @@
 package seasonSix.lotto.infra.validator;
 
-import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
 
 import java.util.List;
-import java.util.Set;
 
 import static seasonSix.lotto.common.message.ErrorMessage.DUPLICATED_NUMBERS;
 
 public class DuplicatedNumbersValidator extends InputValidator {
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T> void check(T source) {
-        String strSource = (String) source;
-        Set<String> unique = ConvertingUtil.stringToStringSet(strSource);
-        List<String> nonUnique = ConvertingUtil.stringToStringList(strSource);
-        if (unique.size() != nonUnique.size()) {
+        List<Integer> convertedSource = (List<Integer>) source;
+        List<Integer> distincted = convertedSource.stream().distinct().toList();
+        if (distincted.size() != convertedSource.size()) {
             throw new DuplicatedNumberException(DUPLICATED_NUMBERS);
         }
         super.check(source);

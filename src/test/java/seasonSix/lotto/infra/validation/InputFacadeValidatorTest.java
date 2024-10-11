@@ -4,14 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import seasonSix.lotto.infra.validator.InputFacadeValidator;
-import seasonSix.lotto.infra.validator.exception.*;
-import seasonSix.lotto.model.lotto.Lotto;
+import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
+import seasonSix.lotto.infra.validator.exception.MinPriceException;
+import seasonSix.lotto.infra.validator.exception.OverLengthException;
+import seasonSix.lotto.infra.validator.exception.OverRangeException;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seasonSix.lotto.common.message.ErrorMessage.*;
-import static seasonSix.lotto.common.message.ErrorMessage.DUPLICATED_NUMBERS;
+
 
 @Nested
 public class InputFacadeValidatorTest {
@@ -21,24 +23,19 @@ public class InputFacadeValidatorTest {
     class InputPurchaseTest {
 
         @Test
-        @DisplayName("문자열 입력 시 RegexException 발생")
+        @DisplayName("1000원 이상인 경우 정상 동작")
         void inputPurchaseAmountV1() {
             //given
-            String input = "aaaa";
+            Long input = 1000L;
             //when
-            Throwable exception = assertThrowsExactly(
-                    RegexException.class, () -> InputFacadeValidator.checkPurchaseAmount(input),
-                    INVALID_NUMBER
-            );
-            //then
-            assertEquals(INVALID_NUMBER, exception.getMessage());
+            assertDoesNotThrow(() -> InputFacadeValidator.checkPurchaseAmount(input));
         }
 
         @Test
         @DisplayName("1000원 미만인 경우 MinPriceException 발생")
         void inputPurchaseAmountV2() {
             //given
-            String input = "900";
+            Long input = 900L;
             //when
             Throwable exception = assertThrowsExactly(
                     MinPriceException.class, () -> InputFacadeValidator.checkPurchaseAmount(input),
@@ -47,22 +44,7 @@ public class InputFacadeValidatorTest {
             //then
             assertEquals(PURCHASE_LIMIT_COUNT, exception.getMessage());
         }
-
-        @Test
-        @DisplayName("공백 시 RegexException 발생")
-        void inputPurchaseAmountV3() {
-            //given
-            String input = "   ";
-            //when
-            Throwable exception = assertThrowsExactly(
-                    RegexException.class, () -> InputFacadeValidator.checkPurchaseAmount(input),
-                    INVALID_NUMBER
-            );
-            //then
-            assertEquals(INVALID_NUMBER, exception.getMessage());
-        }
     }
-
 
     @Nested
     @DisplayName("당첨 번호 입력 Test")
@@ -72,7 +54,7 @@ public class InputFacadeValidatorTest {
         @DisplayName("중복된 숫자 입력할 경우 DuplicatedNumberException")
         void checkWinningNumbersV1() {
             //given
-            String input = "1,2,3,4,4,5";
+            List<Integer> input = List.of(1, 2, 3, 4, 4, 5);
             //when
             Throwable exception = assertThrowsExactly(
                     DuplicatedNumberException.class, () -> InputFacadeValidator.checkWinningNumbers(input),
@@ -80,37 +62,13 @@ public class InputFacadeValidatorTest {
             );
             //then
             assertEquals(DUPLICATED_NUMBERS, exception.getMessage());
-        }
-
-        @Test
-        @DisplayName("중복된 숫자 + 공백 입력할 경우 DuplicatedNumberException")
-        void checkWinningNumbersV2() {
-            //given
-            String input = "1,2,3,4,4  ,5";
-            //when
-            Throwable exception = assertThrowsExactly(
-                    DuplicatedNumberException.class, () -> InputFacadeValidator.checkWinningNumbers(input),
-                    DUPLICATED_NUMBERS
-            );
-            //then
-            assertEquals(DUPLICATED_NUMBERS, exception.getMessage());
-        }
-
-        @Test
-        @DisplayName("중복된 숫자 + 공백 입력할 경우 No Exception")
-        void checkWinningNumbersV3() {
-            //given
-            String input = "1,2  ,3,  4,5,   6   ";
-            //when
-            //then
-            assertDoesNotThrow(() -> InputFacadeValidator.checkWinningNumbers(input));
         }
 
         @Test
         @DisplayName("7개 이상 입력한 경우 OverLengthException")
         void checkWinningNumbersV4() {
             //given
-            String input = "1,2,3,4,5,6,7";
+            List<Integer> input = List.of(1,2,3,4,5,6,7);
             //when
             Throwable exception = assertThrowsExactly(
                     OverLengthException.class, () -> InputFacadeValidator.checkWinningNumbers(input),
@@ -124,7 +82,7 @@ public class InputFacadeValidatorTest {
         @DisplayName("5개 이상 입력한 경우 OverLengthException")
         void checkWinningNumbersV5() {
             //given
-            String input = "1,2,3,4,5";
+            List<Integer> input = List.of(1,2,3,4,5);
             //when
             Throwable exception = assertThrowsExactly(
                     OverLengthException.class, () -> InputFacadeValidator.checkWinningNumbers(input),
@@ -143,23 +101,21 @@ public class InputFacadeValidatorTest {
         @DisplayName("정상 동작")
         void checkBonusNumberV1() {
             //given
-            String input = "7";
+            Integer input = 7;
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-            Lotto mockLotto = Lotto.newOne(winningNumbers);
             //when & then
-            assertDoesNotThrow(() -> InputFacadeValidator.checkBonusNumber(input, mockLotto));
+            assertDoesNotThrow(() -> InputFacadeValidator.checkBonusNumber(input, winningNumbers));
         }
 
         @Test
         @DisplayName("당첨 번호와 중복되는 번호가 있을 경우 DuplicatedNumberException")
         void checkBonusNumberV2() {
             //given
-            String input = "6";
+            Integer input = 6;
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-            Lotto mockLotto = Lotto.newOne(winningNumbers);
             //when
             Throwable exception = assertThrowsExactly(
-                    DuplicatedNumberException.class, () -> InputFacadeValidator.checkBonusNumber(input, mockLotto),
+                    DuplicatedNumberException.class, () -> InputFacadeValidator.checkBonusNumber(input, winningNumbers),
                     DUPLICATED_NUMBERS
             );
             //then
@@ -170,12 +126,11 @@ public class InputFacadeValidatorTest {
         @DisplayName("1~45 이외의 숫자 입력시 RegexException")
         void checkBonusNumberV3() {
             //given
-            String input = "47";
+            Integer input = 47;
             List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
-            Lotto mockLotto = Lotto.newOne(winningNumbers);
             //when
             Throwable exception = assertThrowsExactly(
-                    OverRangeException.class, () -> InputFacadeValidator.checkBonusNumber(input, mockLotto),
+                    OverRangeException.class, () -> InputFacadeValidator.checkBonusNumber(input, winningNumbers),
                     INVALID_NUMBER
             );
             //then

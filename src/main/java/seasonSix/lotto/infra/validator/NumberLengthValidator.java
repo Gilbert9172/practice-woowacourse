@@ -1,6 +1,5 @@
 package seasonSix.lotto.infra.validator;
 
-import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.infra.validator.exception.OverLengthException;
 
 import java.util.List;
@@ -8,11 +7,12 @@ import java.util.List;
 import static seasonSix.lotto.common.message.ErrorMessage.OVER_LENGTH;
 
 public class NumberLengthValidator extends InputValidator {
+
     @Override
+    @SuppressWarnings("unchecked")
     public <T> void check(T source) {
-        String strSource = (String) source;
-        List<String> uniqueNumbers = ConvertingUtil.stringToStringList(strSource);
-        if (uniqueNumbers.size() != 6) {
+        List<Integer> convertedSource = (List<Integer>) source;
+        if (convertedSource.size() != 6) {
             throw new OverLengthException(OVER_LENGTH);
         }
         super.check(source);

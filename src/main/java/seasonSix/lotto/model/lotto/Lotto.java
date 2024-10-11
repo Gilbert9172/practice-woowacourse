@@ -1,5 +1,7 @@
 package seasonSix.lotto.model.lotto;
 
+import seasonSix.lotto.infra.validator.InputFacadeValidator;
+
 import java.util.List;
 
 public class Lotto {
@@ -14,15 +16,9 @@ public class Lotto {
     }
 
     private Lotto(List<Integer> numbers) {
-        validate(numbers);
+        InputFacadeValidator.checkWinningNumbers(numbers);
         this.numbers = numbers;
         this.rank = Rank.NONE;
-    }
-
-    private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
-        }
     }
 
     public List<Integer> getNumbers() {

@@ -7,10 +7,10 @@ import seasonSix.lotto.model.GameManager;
 import static seasonSix.lotto.common.message.ErrorMessage.PURCHASE_LIMIT_COUNT;
 
 public class MinPriceValidator extends InputValidator {
+
     @Override
     public <T> void check(T source) {
-        String strSource = (String) source;
-        Money price = Money.newOne(Long.parseLong(strSource));
+        Money price = Money.newOne((Long) source);
         if (price.lowerThan(GameManager.price)) {
             throw new MinPriceException(PURCHASE_LIMIT_COUNT);
         }

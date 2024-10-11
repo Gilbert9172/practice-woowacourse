@@ -5,6 +5,7 @@ import seasonSix.lotto.common.Money;
 import java.util.List;
 
 public class Lotto {
+    public static Money price = Money.newOne(1000L);
 
     private final List<Integer> numbers;
 
@@ -27,5 +28,4 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
-
 }

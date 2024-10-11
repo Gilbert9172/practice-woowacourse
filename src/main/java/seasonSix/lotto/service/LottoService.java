@@ -1,20 +1,11 @@
-package seasonSix.lotto.model.lotto;
+package seasonSix.lotto.service;
 
-import seasonSix.lotto.common.Money;
 import seasonSix.lotto.common.utils.LottoGenerateUtil;
+import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;
 
-public class GameManager {
-
-    public static Money price = Money.newOne(1000L);
-
-    public static GameManager newOne() {
-        return new GameManager();
-    }
-
-    public GameManager() {
-    }
+public class LottoService {
 
     public List<Lotto> generateLottos(Long purchasePrice) {
         long lottoCountBy = getLottoCount(purchasePrice);
@@ -22,6 +13,7 @@ public class GameManager {
     }
 
     private long getLottoCount(Long purchasePrice) {
-        return purchasePrice / price.getVal();
+        long lottoPrice = Lotto.price.getVal();
+        return purchasePrice / lottoPrice;
     }
 }

@@ -2,15 +2,23 @@ package seasonSix.lotto.common;
 
 public class Money {
 
-    public static Money zero = new Money(0L);
+    public static Money zero = new Money(0);
 
-    private Long money;
+    private long val;
 
-    private Money(Long money) {
-        this.money = money;
+    private Money(long val) {
+        this.val = val;
     }
 
-    public static Money newOne(Long money) {
-        return new Money(money);
+    public static Money newOne(long val) {
+        return new Money(val);
+    }
+
+    public boolean lowerThan(Money money) {
+        return getVal() < money.getVal();
+    }
+
+    public long getVal() {
+        return val;
     }
 }

@@ -13,7 +13,7 @@ public class LottoGenerateUtilTest {
     @DisplayName("5개의 로또 생성 검증")
     void creatFiveLottos() {
         //given
-        int purchaseCount = 5;
+        long purchaseCount = 5;
 
         //when
         List<Lotto> lottos = LottoGenerateUtil.generate(purchaseCount);
@@ -26,7 +26,7 @@ public class LottoGenerateUtilTest {
     @DisplayName("로또 오름차순 검증")
     void lottoAscTest() {
         //given
-        int purchaseCount = 5;
+        long purchaseCount = 5;
 
         //when
         List<Lotto> lottos = LottoGenerateUtil.generate(purchaseCount);

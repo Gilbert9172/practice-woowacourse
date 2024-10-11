@@ -1,9 +1,13 @@
 package seasonSix.lotto.model.lotto;
 
+import seasonSix.lotto.common.Money;
+
 import java.util.List;
 
 public class Lotto {
+
     private final List<Integer> numbers;
+
 
     public static Lotto newOne(List<Integer> numbers) {
         return new Lotto(numbers);
@@ -23,4 +27,5 @@ public class Lotto {
     public List<Integer> getNumbers() {
         return numbers;
     }
+
 }

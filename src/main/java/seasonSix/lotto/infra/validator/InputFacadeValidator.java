@@ -1,17 +1,19 @@
 package seasonSix.lotto.infra.validator;
 
+import seasonSix.lotto.model.lotto.Lotto;
+
 public class InputFacadeValidator {
     public static void checkPurchaseAmount(String source) {
-        NumberRegexValidator numberRegexValidator = new NumberRegexValidator();
+        PriceRegexValidator priceRegexValidator = new PriceRegexValidator();
         MinPriceValidator minPriceValidator = new MinPriceValidator();
 
-        numberRegexValidator.doChain(minPriceValidator);
+        priceRegexValidator.doChain(minPriceValidator);
 
-        numberRegexValidator.check(source);
+        priceRegexValidator.check(source);
     }
 
     public static void checkWinningNumbers(String source) {
-        DuplicatedNumberValidator duplicatedNumberValidation = new DuplicatedNumberValidator();
+        DuplicatedNumbersValidator duplicatedNumberValidation = new DuplicatedNumbersValidator();
         NumbersRegexValidator numbersRegexValidator = new NumbersRegexValidator();
         NumberRangeValidator numberRangeValidator = new NumberRangeValidator();
         NumberLengthValidator numberLengthValidator = new NumberLengthValidator();
@@ -22,5 +24,12 @@ public class InputFacadeValidator {
                 .doChain(numberLengthValidator);
 
         duplicatedNumberValidation.check(source);
+    }
+
+    public static void checkBonusNumber(String source, Lotto lotto) {
+        NumberRangeValidator numberRangeValidator = new NumberRangeValidator();
+        numberRangeValidator.check(source);
+        DuplicatedNumberValidator duplicatedNumberValidator = new DuplicatedNumberValidator();
+        duplicatedNumberValidator.check(source, lotto);
     }
 }

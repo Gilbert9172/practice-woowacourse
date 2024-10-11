@@ -2,16 +2,16 @@ package seasonSix.lotto.infra.validation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import seasonSix.lotto.infra.validator.DuplicatedNumberValidator;
+import seasonSix.lotto.infra.validator.DuplicatedNumbersValidator;
 import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static seasonSix.lotto.common.message.ErrorMessage.DUPLICATED_NUMBERS;
 
-public class DuplicatedNumberValidatorTest {
+public class DuplicatedNumbersValidatorTest {
 
-    private final DuplicatedNumberValidator validator = new DuplicatedNumberValidator();
+    private final DuplicatedNumbersValidator validator = new DuplicatedNumbersValidator();
 
     @Test
     @DisplayName("중복된 숫자 입력시 DuplicatedNumberException 발생")

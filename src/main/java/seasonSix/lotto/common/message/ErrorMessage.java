@@ -6,4 +6,5 @@ public class ErrorMessage {
     public static String LOWER_THAN_ZERO = "[ERROR] 0보다 큰 값을 입력해주세요.";
     public static String DUPLICATED_NUMBERS = "[ERROR] 중복된 숫자를 입력하였습니다.";
     public static String OVER_LENGTH = "[ERROR] 6개의 숫자를 입력해야 합니다.";
+    public static String SHOULD_NOT_BE_NULL = "[ERROR] Null 허용되지 않습니다.";
 }

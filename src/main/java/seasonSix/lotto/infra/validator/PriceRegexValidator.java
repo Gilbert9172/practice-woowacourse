@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import static seasonSix.lotto.common.message.ErrorMessage.INVALID_NUMBER;
 
-public class NumberRegexValidator extends InputValidator {
+public class PriceRegexValidator extends InputValidator {
 
     @Override
     public <T> void check(T source) {

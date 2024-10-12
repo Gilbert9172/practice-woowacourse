@@ -1,15 +1,11 @@
 package seasonSix.lotto.model;
 
-import seasonSix.lotto.common.Money;
-import seasonSix.lotto.common.utils.LottoGenerateUtil;
 import seasonSix.lotto.infra.validator.InputFacadeValidator;
 import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;
 
 public class LottoManager {
-
-    public static Money price = Money.of(1000L);
     private Lotto lotto;
     private Integer bonusNumber;
 
@@ -21,15 +17,5 @@ public class LottoManager {
 
     public static LottoManager of(List<Integer> numbers, Integer bonusNumber) {
         return new LottoManager(numbers, bonusNumber);
-    }
-
-    public List<Lotto> generateLottos(Long purchasePrice) {
-        long lottoCountBy = getLottoCount(purchasePrice);
-        return LottoGenerateUtil.generate(lottoCountBy);
-    }
-
-    private long getLottoCount(Long purchasePrice) {
-        long lottoPrice = LottoManager.price.getVal();
-        return purchasePrice / lottoPrice;
     }
 }

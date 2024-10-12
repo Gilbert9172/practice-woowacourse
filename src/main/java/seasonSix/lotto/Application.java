@@ -1,6 +1,7 @@
 package seasonSix.lotto;
 
 import seasonSix.lotto.infra.controller.GameController;
+import seasonSix.lotto.service.LottoService;
 import seasonSix.lotto.service.UserService;
 
 public class Application {
@@ -11,6 +12,7 @@ public class Application {
 
     private static GameController setupController() {
         UserService userService = new UserService();
-        return new GameController(userService);
+        LottoService lottoService = new LottoService();
+        return new GameController(userService, lottoService);
     }
 }

@@ -6,7 +6,8 @@ import static seasonSix.lotto.common.message.ErrorMessage.LOWER_THAN_ZERO;
 
 public class Money {
 
-    public static Money zero = new Money(0);
+    public static final Money zero = new Money(0);
+    public static final Money lottoPrice = Money.of(1000L);
 
     private long val;
 
@@ -27,5 +28,13 @@ public class Money {
 
     public long getVal() {
         return val;
+    }
+
+    public long getLottoCount() {
+        return this.val / lottoPrice.getVal();
+    }
+
+    public boolean isLowerThanMinPurchasePrice() {
+        return this.lowerThan(lottoPrice);
     }
 }

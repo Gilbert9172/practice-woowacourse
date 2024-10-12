@@ -7,20 +7,20 @@ import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;
 
-public class GameManager {
+public class LottoManager {
 
     public static Money price = Money.newOne(1000L);
     private Lotto lotto;
     private Integer bonusNumber;
 
-    private GameManager(List<Integer> numbers, Integer bonusNumber) {
+    private LottoManager(List<Integer> numbers, Integer bonusNumber) {
         InputFacadeValidator.checkBonusNumber(bonusNumber, numbers);
         this.lotto = Lotto.newOne(numbers);
         this.bonusNumber = bonusNumber;
     }
 
-    public static GameManager newOne(List<Integer> numbers, Integer bonusNumber) {
-        return new GameManager(numbers, bonusNumber);
+    public static LottoManager newOne(List<Integer> numbers, Integer bonusNumber) {
+        return new LottoManager(numbers, bonusNumber);
     }
 
     public List<Lotto> generateLottos(Long purchasePrice) {
@@ -29,7 +29,7 @@ public class GameManager {
     }
 
     private long getLottoCount(Long purchasePrice) {
-        long lottoPrice = GameManager.price.getVal();
+        long lottoPrice = LottoManager.price.getVal();
         return purchasePrice / lottoPrice;
     }
 }

@@ -14,7 +14,7 @@ public class Money {
         this.val = val;
     }
 
-    public static Money newOne(long val) {
+    public static Money of(long val) {
         if (val < 0) {
             throw new LowerThanZeroException(LOWER_THAN_ZERO);
         }

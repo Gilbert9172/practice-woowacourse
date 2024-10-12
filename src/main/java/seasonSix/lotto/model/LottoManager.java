@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LottoManager {
 
-    public static Money price = Money.newOne(1000L);
+    public static Money price = Money.of(1000L);
     private Lotto lotto;
     private Integer bonusNumber;
 
@@ -19,7 +19,7 @@ public class LottoManager {
         this.bonusNumber = bonusNumber;
     }
 
-    public static LottoManager newOne(List<Integer> numbers, Integer bonusNumber) {
+    public static LottoManager of(List<Integer> numbers, Integer bonusNumber) {
         return new LottoManager(numbers, bonusNumber);
     }
 

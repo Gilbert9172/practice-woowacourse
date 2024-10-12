@@ -14,7 +14,7 @@ public class User {
     private User(List<Lotto> lottos, long purchasePrice) {
         InputFacadeValidator.checkPurchaseAmount(purchasePrice);
         this.lottos = lottos;
-        this.purchasePrice = Money.newOne(purchasePrice);
+        this.purchasePrice = Money.of(purchasePrice);
     }
 
     public static User newOne(List<Lotto> lottos, long purchasePrice) {

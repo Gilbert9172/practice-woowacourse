@@ -10,7 +10,7 @@ public class MinPriceValidator extends InputValidator {
 
     @Override
     public <T> void check(T source) {
-        Money price = Money.newOne((Long) source);
+        Money price = Money.of((Long) source);
         if (price.lowerThan(GameManager.price)) {
             throw new MinPriceException(PURCHASE_LIMIT_COUNT);
         }

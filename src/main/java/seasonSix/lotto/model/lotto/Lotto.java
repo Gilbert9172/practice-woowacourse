@@ -7,11 +7,10 @@ import java.util.List;
 public class Lotto {
 
     private List<Integer> numbers;
-    private boolean isChecked;
     private Rank rank;
 
 
-    public static Lotto newOne(List<Integer> numbers) {
+    public static Lotto of(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
@@ -23,5 +22,9 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return numbers;
+    }
+
+    public void assignRank(Rank rank) {
+        this.rank = rank;
     }
 }

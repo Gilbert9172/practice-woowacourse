@@ -11,8 +11,8 @@ public class Application {
     }
 
     private static GameController setupController() {
-        UserService userService = new UserService();
         LottoService lottoService = new LottoService();
+        UserService userService = new UserService(lottoService);
         return new GameController(userService, lottoService);
     }
 }

@@ -14,7 +14,7 @@ public class LottoGenerateUtil {
         LongStream.range(0, purchaseCount).forEach((i) -> {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
             numbers.sort(Comparator.naturalOrder());
-            lottos.add(Lotto.newOne(numbers));
+            lottos.add(Lotto.of(numbers));
         });
         return lottos;
     }

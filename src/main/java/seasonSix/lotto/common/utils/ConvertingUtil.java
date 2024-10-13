@@ -30,4 +30,10 @@ public class ConvertingUtil {
                 .sorted()
                 .toList();
     }
+
+    public static int[] integerListToIntArray(List<Integer> source) {
+        return source.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
 }

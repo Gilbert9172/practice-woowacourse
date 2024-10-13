@@ -3,7 +3,9 @@ package seasonSix.lotto.infra.controller;
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.infra.InputManager;
 import seasonSix.lotto.infra.view.InputDTO;
+import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
+import seasonSix.lotto.model.User;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.service.LottoService;
 import seasonSix.lotto.service.UserService;
@@ -28,7 +30,7 @@ public class GameController {
 
         LottoManager lottoManager = lottoService.createManager(winningNumbers, bonusNumber);
         List<Lotto> lottos = lottoService.generateLottos(purchasePrice);
-        userService.startGame(lottoManager, lottos, purchasePrice);
+        MyResultView myResultView = userService.startGame(lottoManager, lottos, purchasePrice);
     }
 
     private InputDTO enterInputs() {

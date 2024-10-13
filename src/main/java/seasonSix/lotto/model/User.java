@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class User {
     private List<Lotto> lottos = new ArrayList<>();
@@ -49,5 +50,15 @@ public class User {
 
     public String getBenefit() {
         return benefit;
+    }
+
+    public Map<Rank, Integer> getRankTableExceptNone() {
+        return rankTable.entrySet()
+                .stream()
+                .filter(entry -> Rank.isNotNone(entry.getKey()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                ));
     }
 }

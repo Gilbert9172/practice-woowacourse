@@ -7,7 +7,7 @@ import java.util.List;
 
 import static seasonSix.lotto.common.message.ErrorMessage.LOWER_THAN_ZERO;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     public static final Money zero = new Money(0);
     public static final Money lottoPrice = Money.of(1000L);
@@ -59,5 +59,10 @@ public class Money {
 
     public boolean isLowerThanMinPurchasePrice() {
         return this.lowerThan(lottoPrice);
+    }
+
+    @Override
+    public int compareTo(Money o) {
+        return Long.compare(this.val, o.val);
     }
 }

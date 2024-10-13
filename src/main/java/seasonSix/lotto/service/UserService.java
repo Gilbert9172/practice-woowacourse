@@ -1,15 +1,15 @@
 package seasonSix.lotto.service;
 
+import seasonSix.baseball.infra.view.ResultView;
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.common.utils.MathUtil;
+import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
 import seasonSix.lotto.model.User;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.model.lotto.Rank;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserService {
 
@@ -19,10 +19,11 @@ public class UserService {
         this.lottoService = lottoService;
     }
 
-    public void startGame(LottoManager manager, List<Lotto> lottos, Money purchasePrice) {
+    public MyResultView startGame(LottoManager manager, List<Lotto> lottos, Money purchasePrice) {
         User user = createUser(lottos, purchasePrice);
         matchingNumbers(manager, user);
         calculateAdjustment(user);
+        return MyResultView.from(user);
     }
 
     public User createUser(List<Lotto> lottos, Money purchasePrice) {

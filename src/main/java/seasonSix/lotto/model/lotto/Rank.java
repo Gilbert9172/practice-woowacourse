@@ -4,6 +4,7 @@ import seasonSix.lotto.common.Money;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public enum Rank {
     FIRST(6, 0, Money.of(2000000000L)),
@@ -33,6 +34,13 @@ public enum Rank {
                 .sorted(comparator)
                 .reduce((high, low) -> high)
                 .orElse(NONE);
+    }
+
+    public static List<Rank> sortedValuesExceptNone() {
+        return Arrays.stream(Rank.values())
+                .sorted(Comparator.comparing(Rank::getPrizeMoney))
+                .filter(Rank::isNotNone)
+                .toList();
     }
 
     public static boolean isNotNone(Rank rank) {

@@ -7,6 +7,7 @@ import seasonSix.lotto.model.validator.exception.RegexException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seasonSix.lotto.common.message.ErrorMessage.INVALID_NUMBER;
+import static seasonSix.lotto.common.message.ErrorMessage.INVALID_PRICE;
 
 
 public class NumberRegexValidatorTest {
@@ -18,9 +19,9 @@ public class NumberRegexValidatorTest {
         String price = "test";
         Throwable exception = assertThrowsExactly(
                 RegexException.class, () -> priceRegexValidator.check(price),
-                INVALID_NUMBER
+                INVALID_PRICE
         );
-        assertEquals(INVALID_NUMBER, exception.getMessage());
+        assertEquals(INVALID_PRICE, exception.getMessage());
     }
 
     @Test

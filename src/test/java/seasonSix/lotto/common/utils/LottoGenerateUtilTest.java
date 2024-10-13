@@ -6,7 +6,7 @@ import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGenerateUtilTest {
     @Test
@@ -20,18 +20,5 @@ public class LottoGenerateUtilTest {
 
         //then
         assertThat(lottos.size()).isEqualTo(5);
-    }
-
-    @Test
-    @DisplayName("로또 오름차순 검증")
-    void lottoAscTest() {
-        //given
-        long purchaseCount = 5;
-
-        //when
-        List<Lotto> lottos = LottoGenerateUtil.generate(purchaseCount);
-
-        //then
-        lottos.forEach(lotto -> assertThat(lotto.getNumbers()).isSorted());
     }
 }

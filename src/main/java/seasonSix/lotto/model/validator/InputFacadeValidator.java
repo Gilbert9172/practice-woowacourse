@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InputFacadeValidator {
 
-    public static void checkPurchaseAmount(Long source) {
+    public static void checkPurchaseAmount(String source) {
         PriceRegexValidator priceRegexValidator = new PriceRegexValidator();
         MinPriceValidator minPriceValidator = new MinPriceValidator();
 

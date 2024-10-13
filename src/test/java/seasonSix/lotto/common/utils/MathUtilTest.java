@@ -16,7 +16,7 @@ public class MathUtilTest {
         Money purchased = Money.of(3000);
         Money benefit = earned.minus(purchased);
         //when
-        String actual = MathUtil.divide(benefit.getVal(), purchased.getVal());
+        String actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
         //then
         assertThat(actual).isEqualTo("200.0");
     }
@@ -29,7 +29,7 @@ public class MathUtilTest {
         Money purchased = Money.of(8000);
         Money benefit = earned.minus(purchased);
         //when
-        String actual = MathUtil.divide(benefit.getVal(), purchased.getVal());
+        String actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
         //then
         assertThat(actual).isEqualTo("25037462.5");
     }

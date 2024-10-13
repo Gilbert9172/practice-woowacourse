@@ -18,7 +18,7 @@ public class User {
     private String benefit;
 
     private User(List<Lotto> lottos, Money purchasePrice) {
-        InputFacadeValidator.checkPurchaseAmount(purchasePrice.getVal());
+        InputFacadeValidator.checkPurchaseAmount(purchasePrice.toString());
         this.lottos = lottos;
         this.purchasePrice = purchasePrice;
         this.benefit = "0.0";

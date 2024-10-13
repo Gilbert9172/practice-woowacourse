@@ -67,6 +67,11 @@ public class Money implements Comparable<Money> {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(val);
+    }
+
+    @Override
     public int compareTo(Money o) {
         return Long.compare(this.val, o.val);
     }

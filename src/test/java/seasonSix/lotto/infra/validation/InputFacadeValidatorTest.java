@@ -26,7 +26,7 @@ public class InputFacadeValidatorTest {
         @DisplayName("1000원 이상인 경우 정상 동작")
         void inputPurchaseAmountV1() {
             //given
-            Long input = 1000L;
+            String input = "1000";
             //when
             assertDoesNotThrow(() -> InputFacadeValidator.checkPurchaseAmount(input));
         }
@@ -35,7 +35,7 @@ public class InputFacadeValidatorTest {
         @DisplayName("1000원 미만인 경우 MinPriceException 발생")
         void inputPurchaseAmountV2() {
             //given
-            Long input = 900L;
+            String input = "900";
             //when
             Throwable exception = assertThrowsExactly(
                     MinPriceException.class, () -> InputFacadeValidator.checkPurchaseAmount(input),

@@ -6,6 +6,7 @@ import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.model.lotto.Rank;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class OutputUtil {
         lottos.forEach(lotto -> {
             List<String> strNumbers = lotto.getNumbers()
                     .stream()
+                    .sorted(Comparator.naturalOrder())
                     .map(String::valueOf)
                     .toList();
             String strLotto = String.join(CommonConstant.COMMA.getSpliter() + " ", strNumbers);

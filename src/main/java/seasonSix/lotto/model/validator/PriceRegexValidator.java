@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seasonSix.lotto.common.message.ErrorMessage.INVALID_NUMBER;
+import static seasonSix.lotto.common.message.ErrorMessage.INVALID_PRICE;
 
 public class PriceRegexValidator extends InputValidator {
 
@@ -16,7 +17,7 @@ public class PriceRegexValidator extends InputValidator {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(strSource);
         if (!matcher.matches()) {
-            throw new RegexException(INVALID_NUMBER);
+            throw new RegexException(INVALID_PRICE);
         }
         super.check(source);
     }

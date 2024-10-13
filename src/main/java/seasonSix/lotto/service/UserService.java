@@ -51,8 +51,13 @@ public class UserService {
         Money purchased = user.getPurchasePrice();
         if (!earned.lowerThan(purchased)) {
             Money benefit = earned.minus(purchased);
-            String divideResult = MathUtil.divide(benefit.getVal(), purchased.getVal());
-            user.finishAdjustment(divideResult);
+            String benefitPercent = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
+            user.finishAdjustment(benefitPercent);
+        }
+        if (earned.lowerThan(purchased)) {
+            Money damage = purchased.minus(earned);
+            String damagePercent = MathUtil.getDamage(damage.getVal(), purchased.getVal());
+            user.finishAdjustment(damagePercent);
         }
     }
 }

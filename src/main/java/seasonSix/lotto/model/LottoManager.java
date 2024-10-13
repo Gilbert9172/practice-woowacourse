@@ -1,7 +1,7 @@
 package seasonSix.lotto.model;
 
-import seasonSix.lotto.model.validator.InputFacadeValidator;
 import seasonSix.lotto.model.lotto.Lotto;
+import seasonSix.lotto.model.validator.InputFacadeValidator;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class LottoManager {
         return new LottoManager(numbers, bonusNumber);
     }
 
-    public List<Integer> getWinningNumbers() {
-        return winningNumbers.getNumbers();
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
     }
 
     public Integer getBonusNumber() {

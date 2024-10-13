@@ -22,25 +22,15 @@ public class LottoService {
     }
 
     public Rank assignRank(LottoManager manager, Lotto userLotto) {
-        List<Integer> userLottoNumbers = userLotto.getNumbers();
-        int[] winningNumbers = ConvertingUtil.integerListToIntArray(manager.getWinningNumbers());
+        Lotto winningLotto = manager.getWinningNumbers();
         int bonusNumber = manager.getBonusNumber();
 
-        int matchedCount = (int) userLottoNumbers.stream()
-                .filter(num -> isMatched(winningNumbers, num))
-                .count();
-
+        int matchedCount = userLotto.getMatchedCount(winningLotto);
         boolean bonusCondition = false;
         if (matchedCount == 5) {
-            bonusCondition = userLottoNumbers.contains(bonusNumber);
+            bonusCondition = userLotto.contains(bonusNumber);
         }
 
-        Rank rank = Rank.calculateRank(matchedCount, bonusCondition);
-        userLotto.assignRank(rank);
-        return rank;
-    }
-
-    private boolean isMatched(int[] winningNumbers, int num) {
-        return Arrays.binarySearch(winningNumbers, num) >= 0;
+        return Rank.calculateRank(matchedCount, bonusCondition);
     }
 }

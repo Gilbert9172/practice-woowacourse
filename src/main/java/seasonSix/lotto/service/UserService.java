@@ -23,8 +23,6 @@ public class UserService {
         User user = createUser(lottos, purchasePrice);
         matchingNumbers(manager, user);
         calculateAdjustment(user);
-
-
     }
 
     public User createUser(List<Lotto> lottos, Money purchasePrice) {

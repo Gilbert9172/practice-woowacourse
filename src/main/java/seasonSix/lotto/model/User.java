@@ -5,10 +5,7 @@ import seasonSix.lotto.model.validator.InputFacadeValidator;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.model.lotto.Rank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class User {
@@ -22,14 +19,17 @@ public class User {
         this.lottos = lottos;
         this.purchasePrice = purchasePrice;
         this.benefit = "0.0";
+        this.rankTable = initiateRankTable();
+    }
+
+    private Map<Rank, Integer> initiateRankTable() {
+        Map<Rank, Integer> rankTable = new HashMap<>();
+        Arrays.stream(Rank.values()).forEach(rank -> rankTable.put(rank, 0));
+        return rankTable;
     }
 
     public static User of(List<Lotto> lottos, Money purchasePrice) {
         return new User(lottos, purchasePrice);
-    }
-
-    public void finishMatchingNumbers(Map<Rank, Integer> rankTable) {
-        this.rankTable = rankTable;
     }
 
     public void finishAdjustment(String benefit) {

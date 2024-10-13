@@ -38,6 +38,10 @@ public class Money implements Comparable<Money> {
         return getVal() < money.getVal();
     }
 
+    public boolean boeThan(Money money) {
+        return getVal() >= money.getVal();
+    }
+
     public Money minus(Money money) {
         long minus = this.val - money.val;
         if (minus < 0) {

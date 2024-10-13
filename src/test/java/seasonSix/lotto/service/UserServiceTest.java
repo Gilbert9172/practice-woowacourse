@@ -3,6 +3,7 @@ package seasonSix.lotto.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import seasonSix.lotto.ReflectionUtil;
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.model.LottoManager;
 import seasonSix.lotto.model.User;
@@ -85,7 +86,7 @@ public class UserServiceTest {
             );
             Money purchasePrice = Money.of(8000);
             User user = User.of(lottos, purchasePrice);
-            user.finishMatchingNumbers(rankTable);
+            ReflectionUtil.forceSetField(user, "rankTable", rankTable);
             //when
             sut.calculateAdjustment(user);
             //then

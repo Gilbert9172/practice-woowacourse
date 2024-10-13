@@ -32,13 +32,11 @@ public class UserService {
     }
 
     public void matchingNumbers(LottoManager manager, User user) {
-        Map<Rank, Integer> rankTable = new HashMap<>();
-        Arrays.stream(Rank.values()).forEach(rank -> rankTable.put(rank, 0));
+        Map<Rank, Integer> rankTable = user.getRankTable();
         user.getLottos().forEach(lotto -> {
             Rank rank = lottoService.assignRank(manager, lotto);
             putOrUpdate(rankTable, rank);
         });
-        user.finishMatchingNumbers(rankTable);
     }
 
     private void putOrUpdate(Map<Rank, Integer> rankTable, Rank rank) {
@@ -49,7 +47,7 @@ public class UserService {
         List<Money> moneyList = ConvertingUtil.rankMapToMoneyList(user.getRankTable());
         Money earned = Money.addAll(moneyList);
         Money purchased = user.getPurchasePrice();
-        if (!earned.lowerThan(purchased)) {
+        if (earned.boeThan(purchased)) {
             Money benefit = earned.minus(purchased);
             String benefitPercent = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
             user.finishAdjustment(benefitPercent);

@@ -30,22 +30,14 @@ public class LottoService {
                 .filter(num -> isMatched(winningNumbers, num))
                 .count();
 
-        int matchedBonusCount = 0;
+        boolean bonusCondition = false;
         if (matchedCount == 5) {
-            matchedBonusCount = bonusMatchedCount(userLottoNumbers, bonusNumber);
+            bonusCondition = userLottoNumbers.contains(bonusNumber);
         }
 
-        Rank rank = Rank.calculateRank(matchedCount, matchedBonusCount);
+        Rank rank = Rank.calculateRank(matchedCount, bonusCondition);
         userLotto.assignRank(rank);
         return rank;
-    }
-
-    private int bonusMatchedCount(List<Integer> numbers, int bonusNumber) {
-        int[] userNumbersArray = ConvertingUtil.integerListToIntArray(numbers);
-        if (isMatched(userNumbersArray, bonusNumber)) {
-            return 1;
-        }
-        return 0;
     }
 
     private boolean isMatched(int[] winningNumbers, int num) {

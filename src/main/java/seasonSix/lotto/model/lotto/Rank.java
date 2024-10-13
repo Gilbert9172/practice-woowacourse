@@ -7,30 +7,29 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum Rank {
-    FIRST(6, 0, Money.of(2000000000L)),
-    SECOND(5, 1, Money.of(30000000L)),
-    THIRD(5, 0, Money.of(1500000L)),
-    FOURTH(4, 0, Money.of(50000L)),
-    FIFTH(3, 0, Money.of(5000L)),
-    NONE(0, 0, Money.zero),
+    FIRST(6, false, Money.of(2000000000L)),
+    SECOND(5, true, Money.of(30000000L)),
+    THIRD(5, false, Money.of(1500000L)),
+    FOURTH(4, false, Money.of(50000L)),
+    FIFTH(3, false, Money.of(5000L)),
+    NONE(0, false, Money.zero),
     ;
 
-    private final int condition;
-    private final int bonusNumber;
+    private final int minMatchedCount;
+    private final boolean bonusCondition;
     private final Money prizeMoney;
 
-    Rank(int condition, int bonusNumber, Money prizeMoney) {
-        this.condition = condition;
-        this.bonusNumber = bonusNumber;
+    Rank(int minMatchedCount, boolean bonusCondition, Money prizeMoney) {
+        this.minMatchedCount = minMatchedCount;
+        this.bonusCondition = bonusCondition;
         this.prizeMoney = prizeMoney;
     }
-    public static Rank calculateRank(int matchedCount, int matchedBonusCount) {
+    public static Rank calculateRank(int matchedCount, boolean bonusCondition) {
         Comparator<Rank> comparator = Comparator.comparingInt(Rank::getCondition)
-                .reversed()
-                .thenComparing(Rank::getBonusNumber);
+                .reversed();
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.condition <= matchedCount)
-                .filter(rank -> rank.bonusNumber == matchedBonusCount)
+                .filter(rank -> rank.minMatchedCount <= matchedCount)
+                .filter(rank -> rank.bonusCondition == bonusCondition)
                 .sorted(comparator)
                 .reduce((high, low) -> high)
                 .orElse(NONE);
@@ -48,11 +47,7 @@ public enum Rank {
     }
 
     public int getCondition() {
-        return condition;
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
+        return minMatchedCount;
     }
 
     public Money getPrizeMoney() {

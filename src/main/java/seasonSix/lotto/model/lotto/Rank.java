@@ -25,7 +25,7 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
     public static Rank calculateRank(int matchedCount, boolean bonusCondition) {
-        Comparator<Rank> comparator = Comparator.comparingInt(Rank::getCondition)
+        Comparator<Rank> comparator = Comparator.comparingInt(Rank::getMinMatchedCount)
                 .reversed();
         return Arrays.stream(Rank.values())
                 .filter(rank -> rank.minMatchedCount <= matchedCount)
@@ -46,7 +46,7 @@ public enum Rank {
         return rank != NONE;
     }
 
-    public int getCondition() {
+    public int getMinMatchedCount() {
         return minMatchedCount;
     }
 

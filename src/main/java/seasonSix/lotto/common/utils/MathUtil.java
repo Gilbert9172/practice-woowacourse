@@ -1,27 +1,24 @@
 package seasonSix.lotto.common.utils;
 
-import seasonSix.lotto.common.Money;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class MathUtil {
-    public static String getBenefit(long benefit, long purchased) {
-        BigDecimal benefitDecimal = BigDecimal.valueOf(benefit);
-        BigDecimal purchasedDecimal = BigDecimal.valueOf(purchased);
-        BigDecimal divideResult = benefitDecimal.divide(purchasedDecimal, 5, RoundingMode.HALF_UP);
-        BigDecimal multiplyResult = divideResult.multiply(BigDecimal.valueOf(100));
-        BigDecimal result = multiplyResult.setScale(1, RoundingMode.HALF_EVEN);
-        return String.valueOf(result);
+    public static BigDecimal getBenefit(long money, long purchased) {
+        BigDecimal result = divideAndMultiply(money, purchased);
+        return result.setScale(1, RoundingMode.HALF_EVEN);
     }
 
-    public static String getDamage(long benefit, long purchased) {
-        BigDecimal benefitDecimal = BigDecimal.valueOf(benefit);
+    public static BigDecimal getDamage(long money, long purchased) {
+        BigDecimal temp = divideAndMultiply(money, purchased);
+        BigDecimal rescaledTemp = temp.setScale(1, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(100).subtract(rescaledTemp);
+    }
+
+    private static BigDecimal divideAndMultiply(long money, long purchased) {
+        BigDecimal benefitDecimal = BigDecimal.valueOf(money);
         BigDecimal purchasedDecimal = BigDecimal.valueOf(purchased);
         BigDecimal divideResult = benefitDecimal.divide(purchasedDecimal, 5, RoundingMode.HALF_UP);
-        BigDecimal multiplyResult = divideResult.multiply(BigDecimal.valueOf(100));
-        BigDecimal result = multiplyResult.setScale(1, RoundingMode.HALF_EVEN);
-        BigDecimal subtract = BigDecimal.valueOf(100).subtract(result);
-        return String.valueOf(subtract);
+        return divideResult.multiply(BigDecimal.valueOf(100));
     }
 }

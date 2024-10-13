@@ -1,31 +1,27 @@
 package seasonSix.lotto.infra.view;
 
-import seasonSix.lotto.model.User;
-import seasonSix.lotto.model.lotto.Rank;
+import seasonSix.lotto.model.lotto.LottoResult;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.math.BigDecimal;
 
 public class MyResultView {
-    private Map<Rank, Integer> resultTable = new HashMap<>();
-    private String benefit;
+    private LottoResult resultTable;
+    private String adjustment;
 
-    private MyResultView(Map<Rank, Integer> resultTable, String benefit) {
+    private MyResultView(LottoResult resultTable, String adjustment) {
         this.resultTable = resultTable;
-        this.benefit = benefit;
+        this.adjustment = adjustment;
     }
 
-    public static MyResultView from(User user) {
-        Map<Rank, Integer> rankTableExceptNone = user.getRankTableExceptNone();
-        String benefit = user.getBenefit();
-        return new MyResultView(rankTableExceptNone, benefit);
+    public static MyResultView from(LottoResult lottoResult, BigDecimal adjustment) {
+        return new MyResultView(lottoResult, String.valueOf(adjustment));
     }
 
-    public Map<Rank, Integer> getResultTable() {
+    public LottoResult getResultTable() {
         return resultTable;
     }
 
-    public String getBenefit() {
-        return benefit;
+    public String getAdjustment() {
+        return adjustment;
     }
 }

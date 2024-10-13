@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import seasonSix.lotto.common.Money;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MathUtilTest {
@@ -16,9 +18,9 @@ public class MathUtilTest {
         Money purchased = Money.of(3000);
         Money benefit = earned.minus(purchased);
         //when
-        String actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
+        BigDecimal actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
         //then
-        assertThat(actual).isEqualTo("200.0");
+        assertThat(actual).isEqualTo(BigDecimal.valueOf(200.0));
     }
 
     @Test
@@ -29,8 +31,8 @@ public class MathUtilTest {
         Money purchased = Money.of(8000);
         Money benefit = earned.minus(purchased);
         //when
-        String actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
+        BigDecimal actual = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
         //then
-        assertThat(actual).isEqualTo("25037462.5");
+        assertThat(actual).isEqualTo(BigDecimal.valueOf(25037462.5));
     }
 }

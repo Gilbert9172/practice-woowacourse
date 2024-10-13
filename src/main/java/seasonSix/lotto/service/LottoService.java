@@ -1,13 +1,11 @@
 package seasonSix.lotto.service;
 
 import seasonSix.lotto.common.Money;
-import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.common.utils.LottoGenerateUtil;
 import seasonSix.lotto.model.LottoManager;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.model.lotto.Rank;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoService {

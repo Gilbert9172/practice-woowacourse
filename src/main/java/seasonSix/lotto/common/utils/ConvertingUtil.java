@@ -2,6 +2,7 @@ package seasonSix.lotto.common.utils;
 
 import seasonSix.lotto.common.CommonConstant;
 import seasonSix.lotto.common.Money;
+import seasonSix.lotto.model.lotto.LottoResult;
 import seasonSix.lotto.model.lotto.Rank;
 
 import java.util.Arrays;
@@ -22,18 +23,5 @@ public class ConvertingUtil {
         return source.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
-    }
-
-    public static List<Money> rankMapToMoneyList(Map<Rank, Integer> source) {
-        return source.entrySet()
-                .stream()
-                .filter(entry -> Rank.isNotNone(entry.getKey()))
-                .filter(entry -> entry.getValue() > 0)
-                .map(entry -> {
-                    Money rewardPrice = entry.getKey().getPrizeMoney();
-                    int rewardCount = entry.getValue();
-                    return rewardPrice.multiply(rewardCount);
-                })
-                .toList();
     }
 }

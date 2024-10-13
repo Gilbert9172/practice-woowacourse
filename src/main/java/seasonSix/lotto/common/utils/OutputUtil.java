@@ -4,11 +4,11 @@ import seasonSix.lotto.common.CommonConstant;
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.lotto.Lotto;
+import seasonSix.lotto.model.lotto.LottoResult;
 import seasonSix.lotto.model.lotto.Rank;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 import static seasonSix.lotto.common.message.OutputMessage.*;
 
@@ -21,13 +21,7 @@ public class OutputUtil {
     public static void printPurchase(List<Lotto> lottos, Money purchasePrice) {
         System.out.println(String.format(PURCHASED, purchasePrice.getLottoCount()));
         lottos.forEach(lotto -> {
-            List<String> strNumbers = lotto.getNumbers()
-                    .stream()
-                    .sorted(Comparator.naturalOrder())
-                    .map(String::valueOf)
-                    .toList();
-            String strLotto = String.join(CommonConstant.COMMA.getSpliter() + " ", strNumbers);
-            String message = String.format(BRACKETS, strLotto);
+            String message = String.format(BRACKETS, lotto.toString());
             System.out.println(message);
         });
         emptyLine();
@@ -38,19 +32,19 @@ public class OutputUtil {
         System.out.println(STATISTIC);
         System.out.println(STATISTIC_DIVIDER);
 
-        Map<Rank, Integer> resultTable = resultView.getResultTable();
+        LottoResult resultTable = resultView.getResultTable();
         List<Rank> ranks = Rank.sortedValuesExceptNone();
         buildRankSummary(resultTable, ranks);
 
-        String benefitResult = String.format(STATISTICS, resultView.getBenefit());
+        String benefitResult = String.format(STATISTICS, resultView.getAdjustment());
         System.out.println(benefitResult);
     }
 
-    private static void buildRankSummary(Map<Rank, Integer> resultTable, List<Rank> ranks) {
+    private static void buildRankSummary(LottoResult resultTable, List<Rank> ranks) {
         ranks.forEach(rank ->{
             StringBuilder message = new StringBuilder();
-            Integer matchedCount = resultTable.get(rank);
-            String minCondition = String.format(MATCHED_CONDITION, rank.getCondition());
+            Integer matchedCount = resultTable.getBy(rank);
+            String minCondition = String.format(MATCHED_CONDITION, rank.getMinMatchedCount());
             String rewardPrice = String.format(AWARD_PRICE, rank.getPrizeMoney().toWon());
             String matchedResult = String.format(MATCHED_RESULT, matchedCount);
             if (rank == Rank.SECOND) {

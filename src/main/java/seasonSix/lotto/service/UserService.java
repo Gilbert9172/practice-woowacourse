@@ -1,16 +1,15 @@
 package seasonSix.lotto.service;
 
-import seasonSix.baseball.infra.view.ResultView;
 import seasonSix.lotto.common.Money;
-import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.common.utils.MathUtil;
 import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
-import seasonSix.lotto.model.User;
 import seasonSix.lotto.model.lotto.Lotto;
+import seasonSix.lotto.model.lotto.LottoResult;
 import seasonSix.lotto.model.lotto.Rank;
 
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class UserService {
 
@@ -21,41 +20,27 @@ public class UserService {
     }
 
     public MyResultView startGame(LottoManager manager, List<Lotto> lottos, Money purchasePrice) {
-        User user = createUser(lottos, purchasePrice);
-        matchingNumbers(manager, user);
-        calculateAdjustment(user);
-        return MyResultView.from(user);
+        LottoResult lottoResult = matchingNumbers(manager, lottos);
+        BigDecimal adjustment = calculateAdjustment(lottoResult, purchasePrice);
+        return MyResultView.from(lottoResult, adjustment);
     }
 
-    public User createUser(List<Lotto> lottos, Money purchasePrice) {
-        return User.of(lottos, purchasePrice);
-    }
-
-    public void matchingNumbers(LottoManager manager, User user) {
-        Map<Rank, Integer> rankTable = user.getRankTable();
-        user.getLottos().forEach(lotto -> {
+    public LottoResult matchingNumbers(LottoManager manager, List<Lotto> lottos) {
+        LottoResult lottoResult = LottoResult.of();
+        lottos.forEach(lotto -> {
             Rank rank = lottoService.assignRank(manager, lotto);
-            putOrUpdate(rankTable, rank);
+            lottoResult.updateIfNecessary(rank);
         });
+        return lottoResult;
     }
 
-    private void putOrUpdate(Map<Rank, Integer> rankTable, Rank rank) {
-        rankTable.put(rank, rankTable.getOrDefault(rank, 0) + 1);
-    }
-
-    public void calculateAdjustment(User user) {
-        List<Money> moneyList = ConvertingUtil.rankMapToMoneyList(user.getRankTable());
-        Money earned = Money.addAll(moneyList);
-        Money purchased = user.getPurchasePrice();
+    public BigDecimal calculateAdjustment(LottoResult lottoResult, Money purchased) {
+        Money earned = lottoResult.getTotalAwards();
         if (earned.boeThan(purchased)) {
             Money benefit = earned.minus(purchased);
-            String benefitPercent = MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
-            user.finishAdjustment(benefitPercent);
+            return MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
         }
-        if (earned.lowerThan(purchased)) {
-            Money damage = purchased.minus(earned);
-            String damagePercent = MathUtil.getDamage(damage.getVal(), purchased.getVal());
-            user.finishAdjustment(damagePercent);
-        }
+        Money damage = purchased.minus(earned);
+        return MathUtil.getDamage(damage.getVal(), purchased.getVal());
     }
 }

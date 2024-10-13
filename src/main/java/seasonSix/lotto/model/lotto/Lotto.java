@@ -1,14 +1,16 @@
 package seasonSix.lotto.model.lotto;
 
+import seasonSix.lotto.common.CommonConstant;
 import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.model.validator.InputFacadeValidator;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> numbers;
+    private final List<Integer> numbers;
 
     public static Lotto of(List<Integer> numbers) {
         return new Lotto(numbers);
@@ -30,7 +32,11 @@ public class Lotto {
         return Arrays.binarySearch(lottoNumbers, num) >= 0;
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public String toString() {
+        List<String> strNumbers = numbers.stream()
+                .sorted(Comparator.naturalOrder())
+                .map(String::valueOf)
+                .toList();
+        return String.join(CommonConstant.COMMA.getSpliter() + " ", strNumbers);
     }
 }

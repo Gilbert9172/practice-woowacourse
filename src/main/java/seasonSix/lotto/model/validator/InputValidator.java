@@ -1,4 +1,4 @@
-package seasonSix.lotto.infra.validator;
+package seasonSix.lotto.model.validator;
 
 public class InputValidator {
     private InputValidator next = null;

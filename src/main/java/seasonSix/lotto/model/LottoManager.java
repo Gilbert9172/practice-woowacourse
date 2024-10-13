@@ -1,6 +1,6 @@
 package seasonSix.lotto.model;
 
-import seasonSix.lotto.infra.validator.InputFacadeValidator;
+import seasonSix.lotto.model.validator.InputFacadeValidator;
 import seasonSix.lotto.model.lotto.Lotto;
 
 import java.util.List;

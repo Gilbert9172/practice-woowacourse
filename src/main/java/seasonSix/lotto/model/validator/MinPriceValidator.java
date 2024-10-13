@@ -1,7 +1,7 @@
-package seasonSix.lotto.infra.validator;
+package seasonSix.lotto.model.validator;
 
 import seasonSix.lotto.common.Money;
-import seasonSix.lotto.infra.validator.exception.MinPriceException;
+import seasonSix.lotto.model.validator.exception.MinPriceException;
 
 import static seasonSix.lotto.common.message.ErrorMessage.PURCHASE_LIMIT_COUNT;
 

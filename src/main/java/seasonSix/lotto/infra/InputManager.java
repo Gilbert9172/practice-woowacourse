@@ -2,13 +2,13 @@ package seasonSix.lotto.infra;
 
 import camp.nextstep.edu.missionutils.Console;
 import seasonSix.lotto.common.utils.ConvertingUtil;
-import seasonSix.lotto.infra.validator.InputFacadeValidator;
+import seasonSix.lotto.model.validator.InputFacadeValidator;
 
 import java.util.List;
 
 import static seasonSix.lotto.common.message.InputMessage.*;
-import static seasonSix.lotto.infra.validator.InputFacadeValidator.checkPurchaseAmount;
-import static seasonSix.lotto.infra.validator.InputFacadeValidator.checkWinningNumbers;
+import static seasonSix.lotto.model.validator.InputFacadeValidator.checkPurchaseAmount;
+import static seasonSix.lotto.model.validator.InputFacadeValidator.checkWinningNumbers;
 
 public class InputManager {
     public static long enterPurchasePrice() {

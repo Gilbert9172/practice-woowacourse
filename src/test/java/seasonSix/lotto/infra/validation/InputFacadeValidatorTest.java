@@ -3,11 +3,11 @@ package seasonSix.lotto.infra.validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import seasonSix.lotto.infra.validator.InputFacadeValidator;
-import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
-import seasonSix.lotto.infra.validator.exception.MinPriceException;
-import seasonSix.lotto.infra.validator.exception.OverLengthException;
-import seasonSix.lotto.infra.validator.exception.OverRangeException;
+import seasonSix.lotto.model.validator.InputFacadeValidator;
+import seasonSix.lotto.model.validator.exception.DuplicatedNumberException;
+import seasonSix.lotto.model.validator.exception.MinPriceException;
+import seasonSix.lotto.model.validator.exception.OverLengthException;
+import seasonSix.lotto.model.validator.exception.OverRangeException;
 
 import java.util.List;
 

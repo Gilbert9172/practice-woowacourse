@@ -2,8 +2,8 @@ package seasonSix.lotto.infra.validation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import seasonSix.lotto.infra.validator.DuplicatedNumbersValidator;
-import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
+import seasonSix.lotto.model.validator.DuplicatedNumbersValidator;
+import seasonSix.lotto.model.validator.exception.DuplicatedNumberException;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package seasonSix.lotto.infra.validator.exception;
+package seasonSix.lotto.model.validator.exception;
 
 public class RegexException extends NumberFormatException{
     public RegexException(String msg) {

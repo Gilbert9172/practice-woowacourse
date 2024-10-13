@@ -1,6 +1,6 @@
-package seasonSix.lotto.infra.validator;
+package seasonSix.lotto.model.validator;
 
-import seasonSix.lotto.infra.validator.exception.OverLengthException;
+import seasonSix.lotto.model.validator.exception.OverLengthException;
 
 import java.util.List;
 

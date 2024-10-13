@@ -2,8 +2,8 @@ package seasonSix.lotto.infra.validation;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import seasonSix.lotto.infra.validator.PriceRegexValidator;
-import seasonSix.lotto.infra.validator.exception.RegexException;
+import seasonSix.lotto.model.validator.PriceRegexValidator;
+import seasonSix.lotto.model.validator.exception.RegexException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static seasonSix.lotto.common.message.ErrorMessage.INVALID_NUMBER;

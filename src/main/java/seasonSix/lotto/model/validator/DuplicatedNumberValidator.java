@@ -1,6 +1,6 @@
-package seasonSix.lotto.infra.validator;
+package seasonSix.lotto.model.validator;
 
-import seasonSix.lotto.infra.validator.exception.DuplicatedNumberException;
+import seasonSix.lotto.model.validator.exception.DuplicatedNumberException;
 
 import java.util.Arrays;
 import java.util.List;

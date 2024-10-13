@@ -1,6 +1,6 @@
-package seasonSix.lotto.infra.validator;
+package seasonSix.lotto.model.validator;
 
-import seasonSix.lotto.infra.validator.exception.RegexException;
+import seasonSix.lotto.model.validator.exception.RegexException;
 
 import java.util.List;
 import java.util.regex.Matcher;

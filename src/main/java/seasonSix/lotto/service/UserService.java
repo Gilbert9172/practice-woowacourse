@@ -2,6 +2,7 @@ package seasonSix.lotto.service;
 
 import seasonSix.baseball.infra.view.ResultView;
 import seasonSix.lotto.common.Money;
+import seasonSix.lotto.common.utils.ConvertingUtil;
 import seasonSix.lotto.common.utils.MathUtil;
 import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
@@ -44,17 +45,7 @@ public class UserService {
     }
 
     public void calculateAdjustment(User user) {
-        Map<Rank, Integer> rankTable = user.getRankTable();
-        List<Money> moneyList = rankTable.entrySet()
-                .stream()
-                .filter(entry -> Rank.isNotNone(entry.getKey()))
-                .filter(entry -> entry.getValue() > 0)
-                .map(entry -> {
-                    Money rewardPrice = entry.getKey().getPrizeMoney();
-                    int rewardCount = entry.getValue();
-                    return rewardPrice.multiply(rewardCount);
-                })
-                .toList();
+        List<Money> moneyList = ConvertingUtil.rankMapToMoneyList(user.getRankTable());
         Money earned = Money.addAll(moneyList);
         Money purchased = user.getPurchasePrice();
         if (!earned.lowerThan(purchased)) {

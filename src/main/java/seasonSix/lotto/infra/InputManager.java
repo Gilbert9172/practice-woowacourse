@@ -24,6 +24,7 @@ public class InputManager {
         String input = Console.readLine();
         List<Integer> converted = ConvertingUtil.stringToIntegerList(input);
         checkWinningNumbers(converted);
+        System.out.println();
         return converted;
     }
 
@@ -32,6 +33,7 @@ public class InputManager {
         String input = Console.readLine();
         int source = Integer.parseInt(input.strip());
         InputFacadeValidator.checkBonusNumber(source, numbers);
+        System.out.println();
         return source;
     }
 }

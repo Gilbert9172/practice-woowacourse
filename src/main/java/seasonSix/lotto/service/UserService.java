@@ -33,6 +33,7 @@ public class UserService {
 
     public void matchingNumbers(LottoManager manager, User user) {
         Map<Rank, Integer> rankTable = new HashMap<>();
+        Arrays.stream(Rank.values()).forEach(rank -> rankTable.put(rank, 0));
         user.getLottos().forEach(lotto -> {
             Rank rank = lottoService.assignRank(manager, lotto);
             putOrUpdate(rankTable, rank);

@@ -20,4 +20,12 @@ public class MyResultView {
         String benefit = user.getBenefit();
         return new MyResultView(rankTableExceptNone, benefit);
     }
+
+    public Map<Rank, Integer> getResultTable() {
+        return resultTable;
+    }
+
+    public String getBenefit() {
+        return benefit;
+    }
 }

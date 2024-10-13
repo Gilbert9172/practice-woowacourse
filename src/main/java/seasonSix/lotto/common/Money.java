@@ -2,7 +2,7 @@ package seasonSix.lotto.common;
 
 import seasonSix.lotto.common.validator.exception.LowerThanZeroException;
 
-import java.util.Arrays;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import static seasonSix.lotto.common.message.ErrorMessage.LOWER_THAN_ZERO;
@@ -11,6 +11,7 @@ public class Money implements Comparable<Money> {
 
     public static final Money zero = new Money(0);
     public static final Money lottoPrice = Money.of(1000L);
+    private static DecimalFormat wonFormatter = new DecimalFormat("###,###");
 
     private long val;
 
@@ -51,6 +52,10 @@ public class Money implements Comparable<Money> {
 
     public long getVal() {
         return val;
+    }
+
+    public String toWon() {
+        return wonFormatter.format(this.val);
     }
 
     public long getLottoCount() {

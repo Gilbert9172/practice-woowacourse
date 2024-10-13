@@ -1,11 +1,10 @@
 package seasonSix.lotto.infra.controller;
 
 import seasonSix.lotto.common.Money;
+import seasonSix.lotto.common.utils.OutputUtil;
 import seasonSix.lotto.infra.InputManager;
-import seasonSix.lotto.infra.view.InputDTO;
 import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
-import seasonSix.lotto.model.User;
 import seasonSix.lotto.model.lotto.Lotto;
 import seasonSix.lotto.service.LottoService;
 import seasonSix.lotto.service.UserService;
@@ -23,21 +22,14 @@ public class GameController {
     }
 
     public void startGame() {
-        InputDTO inputs = enterInputs();
-        List<Integer> winningNumbers = inputs.getWinningNumbers();
-        Integer bonusNumber = inputs.getBonusNumber();
-        Money purchasePrice = inputs.getPurchasePrice();
-
-        LottoManager lottoManager = lottoService.createManager(winningNumbers, bonusNumber);
-        List<Lotto> lottos = lottoService.generateLottos(purchasePrice);
-        MyResultView myResultView = userService.startGame(lottoManager, lottos, purchasePrice);
-    }
-
-    private InputDTO enterInputs() {
         Money purchasePrice = Money.of(InputManager.enterPurchasePrice());
-        // TODO : 구매 내역 출력
+        List<Lotto> lottos = lottoService.generateLottos(purchasePrice);
+        OutputUtil.printPurchase(lottos, purchasePrice);
         List<Integer> winningNumbers = InputManager.enterWinningNumbers();
         Integer bonusNumber = InputManager.enterBonusNumber(winningNumbers);
-        return InputDTO.of(purchasePrice, winningNumbers, bonusNumber);
+
+        LottoManager lottoManager = lottoService.createManager(winningNumbers, bonusNumber);
+        MyResultView myResultView = userService.startGame(lottoManager, lottos, purchasePrice);
+        OutputUtil.printResult(myResultView);
     }
 }

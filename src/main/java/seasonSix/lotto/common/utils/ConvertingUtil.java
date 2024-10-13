@@ -7,8 +7,6 @@ import seasonSix.lotto.model.lotto.Rank;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ConvertingUtil {
     public static List<Integer> stringToIntegerList(String source) {

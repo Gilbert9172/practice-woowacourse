@@ -3,24 +3,16 @@ package seasonSix.lotto.infra.controller;
 import seasonSix.lotto.common.Money;
 import seasonSix.lotto.infra.InputManager;
 import seasonSix.lotto.infra.view.InputDTO;
-import seasonSix.lotto.model.LottoManager;
-import seasonSix.lotto.model.User;
-import seasonSix.lotto.model.lotto.Lotto;
-import seasonSix.lotto.model.lotto.Rank;
-import seasonSix.lotto.service.LottoService;
-import seasonSix.lotto.service.UserService;
+import seasonSix.lotto.service.GameFacadeService;
 
 import java.util.List;
-import java.util.Map;
 
 public class GameController {
 
-    private final UserService userService;
-    private final LottoService lottoService;
+    private final GameFacadeService gameFacadeService;
 
-    public GameController(UserService userService, LottoService lottoService) {
-        this.userService = userService;
-        this.lottoService = lottoService;
+    public GameController(GameFacadeService gameFacadeService) {
+        this.gameFacadeService = gameFacadeService;
     }
 
     public void startGame() {
@@ -28,10 +20,7 @@ public class GameController {
         List<Integer> winningNumbers = inputs.getWinningNumbers();
         Integer bonusNumber = inputs.getBonusNumber();
         Money purchasePrice = inputs.getPurchasePrice();
-
-        LottoManager lottoManager = lottoService.createManager(winningNumbers, bonusNumber);
-        List<Lotto> lottos = lottoService.generateLottos(purchasePrice);
-        userService.startGame(lottoManager, lottos, purchasePrice);
+        gameFacadeService.startGame(winningNumbers, bonusNumber, purchasePrice);
     }
 
     private InputDTO enterInputs() {

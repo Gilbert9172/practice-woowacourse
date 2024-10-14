@@ -2,6 +2,8 @@ package seasonSix.lotto.common;
 
 import seasonSix.lotto.common.validator.exception.LowerThanZeroException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -68,6 +70,25 @@ public class Money implements Comparable<Money> {
 
     public boolean isLowerThanMinPurchasePrice() {
         return this.lowerThan(lottoPrice);
+    }
+
+    public BigDecimal calculateBenefit(Money purchased) {
+        BigDecimal earnedDecimal = BigDecimal.valueOf(val);
+        BigDecimal purchasedDecimal = BigDecimal.valueOf(purchased.getVal());
+        BigDecimal result = earnedDecimal
+                .divide(purchasedDecimal, 5, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
+        return result.setScale(1, RoundingMode.HALF_EVEN);
+    }
+
+    public BigDecimal calculateDamage(Money purchased) {
+        BigDecimal earnedDecimal = BigDecimal.valueOf(val);
+        BigDecimal purchasedDecimal = BigDecimal.valueOf(purchased.getVal());
+        BigDecimal result = earnedDecimal
+                .divide(purchasedDecimal, 5, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(100));
+        BigDecimal rescaledResult = result.setScale(1, RoundingMode.HALF_EVEN);
+        return BigDecimal.valueOf(100).subtract(rescaledResult);
     }
 
     @Override

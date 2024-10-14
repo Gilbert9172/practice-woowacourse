@@ -33,13 +33,20 @@ public class LottoResult {
     public Money getTotalAwards() {
         List<Money> monies = rankTable.entrySet()
                 .stream()
-                .filter(entry -> entry.getValue() > 0)
-                .map(entry -> {
-                    Money rewardPrice = entry.getKey().getPrizeMoney();
-                    int rewardCount = entry.getValue();
-                    return rewardPrice.multiply(rewardCount);
-                })
+                .filter(this::hasReward)
+                .map(this::toMoney)
                 .toList();
         return Money.addAll(monies);
+    }
+
+    private boolean hasReward(Map.Entry<Rank, Integer> entry) {
+        Integer rankCount = entry.getValue();
+        return rankCount > 0;
+    }
+
+    private Money toMoney(Map.Entry<Rank, Integer> entry) {
+        Money rewardPrice = entry.getKey().getPrizeMoney();
+        int rewardCount = entry.getValue();
+        return rewardPrice.multiply(rewardCount);
     }
 }

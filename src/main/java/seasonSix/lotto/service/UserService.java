@@ -1,7 +1,6 @@
 package seasonSix.lotto.service;
 
 import seasonSix.lotto.common.Money;
-import seasonSix.lotto.common.utils.MathUtil;
 import seasonSix.lotto.infra.view.MyResultView;
 import seasonSix.lotto.model.LottoManager;
 import seasonSix.lotto.model.lotto.Lotto;
@@ -38,9 +37,9 @@ public class UserService {
         Money earned = lottoResult.getTotalAwards();
         if (earned.boeThan(purchased)) {
             Money benefit = earned.minus(purchased);
-            return MathUtil.getBenefit(benefit.getVal(), purchased.getVal());
+            return benefit.calculateBenefit(purchased);
         }
         Money damage = purchased.minus(earned);
-        return MathUtil.getDamage(damage.getVal(), purchased.getVal());
+        return damage.calculateDamage(purchased);
     }
 }
